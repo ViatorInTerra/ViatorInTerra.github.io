@@ -11,680 +11,487 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Political Economic Dimensions Test</title>
-  <meta name="description" content="A multidimensional political-economic questionnaire that scores force, center, feud, common-good politics, anthropology, property, administration, economy, justice, coercion, two jurisprudence axes, philosophy of history, and productive ecology, then maps the result onto canonical attractor profiles." />
+  <meta name="description" content="A 78-item test across 14 political-economic dimensions. Results are scored by axis and compared with canonical attractor profiles." />
   <meta property="og:title" content="Political Economic Dimensions Test" />
-  <meta property="og:description" content="A multidimensional political-economic questionnaire that scores force, center, feud, common-good politics, anthropology, property, administration, economy, justice, coercion, two jurisprudence axes, philosophy of history, and productive ecology, then maps the result onto canonical attractor profiles." />
+  <meta property="og:description" content="A 78-item test across 14 political-economic dimensions. Results are scored by axis and compared with canonical attractor profiles." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Political Economic Dimensions Test" />
-  <meta name="twitter:description" content="A multidimensional political-economic questionnaire that scores force, center, feud, common-good politics, anthropology, property, administration, economy, justice, coercion, two jurisprudence axes, philosophy of history, and productive ecology, then maps the result onto canonical attractor profiles." />
+  <meta name="twitter:description" content="A 78-item test across 14 political-economic dimensions. Results are scored by axis and compared with canonical attractor profiles." />
   <style>
     :root {
-      --bg: #0b1020;
-      --panel: #121a31;
-      --panel-2: #17213f;
-      --panel-3: #1e2b52;
-      --text: #edf2ff;
-      --muted: #b9c3e0;
-      --line: rgba(255,255,255,0.12);
-      --accent: #89b4ff;
-      --accent-2: #c99cff;
-      --accent-3: #6fe1c5;
-      --danger: #ff8ea3;
-      --warning: #ffd280;
-      --shadow: 0 20px 50px rgba(0,0,0,0.35);
-      --radius: 18px;
-      --radius-sm: 12px;
-      --max: 1500px;
-      --track: linear-gradient(90deg, rgba(137,180,255,.28), rgba(255,255,255,.12), rgba(111,225,197,.28));
+      --bg: #07090d;
+      --bg-soft: #0b0f14;
+      --ink: #f3f7fb;
+      --muted: #8793a3;
+      --dim: #5f6a78;
+      --line: #202832;
+      --line-hot: #2c3c48;
+      --cyan: #56f6ff;
+      --magenta: #ff3fb4;
+      --lime: #c8ff5a;
+      --amber: #ffcc66;
+      --danger: #ff5f79;
+      --max: 1440px;
+      --mono: "IBM Plex Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; color-scheme: dark; }
     body {
       margin: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--text);
+      color: var(--ink);
       background:
-        radial-gradient(circle at top left, rgba(137,180,255,0.18), transparent 32%),
-        radial-gradient(circle at top right, rgba(201,156,255,0.14), transparent 28%),
-        linear-gradient(180deg, #09101f, #0b1020 25%, #0c1225 100%);
+        linear-gradient(rgba(86,246,255,.024) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(86,246,255,.018) 1px, transparent 1px),
+        var(--bg);
+      background-size: 48px 48px;
+      font-family: var(--sans);
       line-height: 1.55;
+      min-height: 100vh;
     }
 
-    a {
-      color: #b7d0ff;
-      text-decoration: none;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 999;
+      background: repeating-linear-gradient(180deg, transparent 0, transparent 3px, rgba(255,255,255,.012) 4px);
+      mix-blend-mode: screen;
+      opacity: .55;
     }
 
-    a:hover {
-      text-decoration: underline;
+    ::selection { background: var(--magenta); color: #07090d; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 3px;
     }
 
     .shell {
-      width: min(calc(100% - 32px), var(--max));
+      width: min(calc(100% - 40px), var(--max));
       margin: 0 auto;
-      padding: 28px 0 72px;
+      padding: 34px 0 96px;
     }
 
     .hero {
-      padding: 30px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(8px);
+      position: relative;
+      padding: 48px 0 34px;
+      border-bottom: 1px solid var(--line-hot);
+      overflow: hidden;
     }
 
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(137,180,255,.12);
-      border: 1px solid rgba(137,180,255,.22);
-      color: #d7e6ff;
-      font-size: 0.88rem;
-      margin-bottom: 14px;
+    .hero::after {
+      content: "PEDT / 14D";
+      position: absolute;
+      right: 0;
+      top: 34px;
+      color: rgba(86,246,255,.09);
+      font: 800 clamp(2.5rem, 7vw, 7rem)/1 var(--mono);
+      letter-spacing: -.08em;
+      pointer-events: none;
+      white-space: nowrap;
     }
 
-    h1, h2, h3, h4 {
-      line-height: 1.18;
-      margin: 0 0 12px;
+    .kicker, .section-kicker {
+      position: relative;
+      z-index: 1;
+      color: var(--cyan);
+      font: 700 .74rem/1.2 var(--mono);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
     }
 
+    h1, h2, h3, h4 { margin: 0; line-height: 1.12; }
     h1 {
-      font-size: clamp(2rem, 4vw, 3.6rem);
-      max-width: 12ch;
-      letter-spacing: -0.03em;
+      position: relative;
+      z-index: 1;
+      max-width: 950px;
+      font-size: clamp(2.8rem, 7vw, 6.8rem);
+      letter-spacing: -.065em;
+      font-weight: 850;
+      text-wrap: balance;
     }
+    h2 { font-size: clamp(1.8rem, 3vw, 3rem); letter-spacing: -.04em; }
+    h3 { font-size: 1.15rem; letter-spacing: -.015em; }
+    h4 { font-size: 1rem; }
 
     .lead {
-      max-width: 86ch;
-      color: var(--muted);
-      font-size: 1.04rem;
-      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+      max-width: 92ch;
+      margin: 22px 0 0;
+      color: #aeb7c4;
+      font-size: 1.02rem;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 20px;
-      margin-top: 20px;
-    }
-
-    .note-card {
-      border-radius: var(--radius);
-      background: rgba(18,26,49,.72);
-      border: 1px solid var(--line);
-      padding: 18px 18px 16px;
-    }
-
-    .note-card p:last-child,
-    .axis-card p:last-child,
-    .match-card p:last-child,
-    .profile-card p:last-child {
-      margin-bottom: 0;
-    }
-
-    .inline-meta {
+    .hero-meta {
+      position: relative;
+      z-index: 1;
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border-radius: 999px;
-      padding: 7px 12px;
-      background: rgba(255,255,255,.05);
-      border: 1px solid var(--line);
+      gap: 0;
+      margin-top: 30px;
       color: var(--muted);
-      font-size: 0.92rem;
+      font: 700 .78rem/1.3 var(--mono);
+      letter-spacing: .05em;
+      text-transform: uppercase;
     }
+    .hero-meta span { display: inline-flex; align-items: center; }
+    .hero-meta span + span::before { content: "/"; color: var(--magenta); margin: 0 11px; }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 42px;
+      margin-top: 42px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+    .note-card { padding: 0; background: none; border: 0; }
+    .note-card h3 { color: var(--ink); margin-bottom: 10px; }
+    .note-card p { margin: 0 0 8px; color: var(--muted); }
 
     .sticky-bar {
       position: sticky;
       top: 0;
-      z-index: 30;
-      margin: 18px 0 22px;
-      padding: 12px 14px;
-      border: 1px solid var(--line);
-      background: rgba(10,16,33,.86);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: var(--shadow);
-    }
-
-    .progress-wrap {
+      z-index: 50;
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex: 1 1 320px;
+      gap: 22px;
+      margin: 0 -20px;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--line-hot);
+      background: rgba(7,9,13,.94);
+      backdrop-filter: blur(14px);
     }
-
-    .progress-bar {
-      position: relative;
-      flex: 1;
-      height: 10px;
-      background: rgba(255,255,255,.08);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress-bar span {
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent-3));
-      border-radius: 999px;
-      transition: width .25s ease;
-    }
-
+    .progress-wrap { display: flex; align-items: center; gap: 14px; min-width: 0; flex: 1; }
     .progress-label {
-      min-width: 130px;
-      color: var(--muted);
-      font-size: 0.93rem;
+      min-width: 122px;
+      color: #c4ccd6;
+      font: 700 .75rem/1 var(--mono);
+      letter-spacing: .04em;
+      text-transform: uppercase;
     }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
+    .progress-bar { position: relative; flex: 1; height: 2px; background: var(--line-hot); overflow: hidden; }
+    .progress-bar span {
+      position: absolute; inset: 0 auto 0 0; width: 0;
+      background: linear-gradient(90deg, var(--cyan), var(--magenta));
+      box-shadow: 0 0 12px rgba(86,246,255,.6);
+      transition: width .2s ease;
     }
-
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; }
     button {
-      border: 0;
+      appearance: none;
+      border: 1px solid var(--line-hot);
+      border-radius: 0;
+      background: #0b1016;
+      color: #c8d0d9;
       cursor: pointer;
-      border-radius: 999px;
-      padding: 11px 16px;
-      font: inherit;
-      font-weight: 600;
-      transition: transform .12s ease, opacity .12s ease, background .2s ease;
+      padding: 9px 12px;
+      font: 700 .74rem/1 var(--mono);
+      letter-spacing: .035em;
+      text-transform: uppercase;
+      transition: border-color .15s ease, color .15s ease, background .15s ease, transform .15s ease;
     }
-
-    button:hover { transform: translateY(-1px); }
-
-    .primary {
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      color: #08101f;
-    }
-
-    .secondary {
-      background: rgba(255,255,255,.08);
-      color: var(--text);
-      border: 1px solid var(--line);
-    }
-
-    .ghost {
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
-      border: 1px solid var(--line);
-    }
+    button:hover { border-color: var(--cyan); color: var(--ink); background: #0e171d; transform: translateY(-1px); }
+    button.primary, button.secondary { border-color: rgba(86,246,255,.55); color: var(--cyan); }
+    button.ghost { color: var(--muted); }
 
     .section {
-      margin-top: 24px;
-      padding: 22px;
-      border-radius: 24px;
-      border: 1px solid var(--line);
-      background: rgba(18,26,49,.68);
-      box-shadow: var(--shadow);
+      margin-top: 0;
+      padding: 64px 0 6px;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
     }
-
-    .scale-grid {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(36px, 1fr));
-      gap: 8px;
-      align-items: center;
-    }
+    .section > h2 { margin-bottom: 12px; }
+    .section > .lead { margin-top: 12px; }
 
     .legend {
       display: grid;
-      grid-template-columns: 1.2fr 2fr;
-      gap: 18px;
-      align-items: start;
-      margin-bottom: 16px;
+      grid-template-columns: minmax(0, 1.5fr) minmax(260px, .8fr);
+      gap: 36px;
+      padding: 0 0 30px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 4px;
     }
-
-    .legend-card {
-      border-radius: 16px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding: 16px;
-    }
-
-    .legend-scale {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 8px;
-      margin-top: 10px;
-      font-size: 0.84rem;
-      color: var(--muted);
+    .legend-card { padding: 0; border: 0; background: transparent; }
+    .legend-card h3 { margin-bottom: 10px; }
+    .legend-scale { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 1px; margin-top: 16px; }
+    .legend-scale > div {
+      padding: 10px 7px;
+      border-top: 1px solid var(--line-hot);
+      color: var(--ink);
+      font: 800 .82rem/1.15 var(--mono);
       text-align: center;
     }
+    .legend-scale .small-muted { display: block; margin-top: 6px; font: 500 .68rem/1.25 var(--sans); }
 
     .axis-section {
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding: 18px;
-      margin-bottom: 18px;
+      padding: 30px 0 12px;
+      margin: 0;
+      border: 0;
+      border-bottom: 1px solid var(--line);
+      background: transparent;
     }
-
     .axis-header {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: baseline;
-      justify-content: space-between;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--line);
+    }
+    .axis-title { font-size: clamp(1.05rem, 1.6vw, 1.3rem); }
+    .axis-sub, .pole-pair, .small-muted { color: var(--muted); font-size: .88rem; }
+    .axis-sub { margin-top: 7px; }
+    .pole-pair { display: flex; gap: 9px; font: 600 .74rem/1.2 var(--mono); text-transform: uppercase; text-align: right; }
+    .pole-pair span:nth-child(2) { color: var(--magenta); }
+
+    .question { padding: 17px 0 18px; border-top: 1px solid rgba(255,255,255,.045); }
+    .axis-header + .question { border-top: 0; }
+    .question-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
       margin-bottom: 12px;
     }
-
-    .axis-title {
-      margin-bottom: 6px;
-    }
-
-    .axis-sub {
-      color: var(--muted);
-      font-size: 0.94rem;
-      margin-top: 4px;
-    }
-
-    .pole-pair {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.9rem;
-    }
-
-    .question {
-      padding: 14px 0;
-      border-top: 1px solid rgba(255,255,255,.06);
-    }
-
-    .question:first-of-type {
-      border-top: 0;
-      padding-top: 4px;
-    }
-
-    .question-top {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 10px;
-    }
-
-    .question-label {
-      font-weight: 600;
-      display: inline-flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .question-text {
-      color: var(--text);
-      max-width: 90ch;
-    }
-
+    .question-label { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 8px; align-items: start; }
+    .question-text { max-width: 100ch; color: #dbe1e8; }
     .badge {
-      flex: 0 0 auto;
-      min-width: 36px;
-      text-align: center;
-      border-radius: 10px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--line);
-      color: var(--muted);
-      padding: 3px 8px;
-      font-size: 0.82rem;
-      font-weight: 700;
+      display: inline-block;
+      min-width: 0;
+      padding: 2px 5px;
+      border: 0;
+      border-left: 2px solid var(--cyan);
+      border-radius: 0;
+      background: transparent;
+      color: var(--cyan);
+      font: 800 .72rem/1.4 var(--mono);
+      text-align: left;
     }
+    .badge.reverse { border-left-color: var(--amber); color: var(--amber); }
 
-    .badge.reverse {
-      color: #ffd9a8;
-      border-color: rgba(255,210,128,.25);
-      background: rgba(255,210,128,.08);
-    }
-
-    .option-row {
-      display: grid;
-      grid-template-columns: repeat(7, minmax(36px, 1fr));
-      gap: 8px;
-    }
-
-    .scale-option {
-      position: relative;
-    }
-
-    .scale-option input {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      pointer-events: none;
-    }
-
+    .option-row { display: grid; grid-template-columns: repeat(7, minmax(42px, 1fr)); gap: 4px; }
+    .scale-option { position: relative; }
+    .scale-option input { position: absolute; opacity: 0; pointer-events: none; }
     .scale-option label {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 42px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,.09);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
-      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 40px;
+      border: 1px solid #1b242d;
+      background: #0a0e13;
+      color: #6f7a88;
       cursor: pointer;
-      transition: background .15s ease, border-color .15s ease, transform .12s ease, color .15s ease;
+      font: 800 .82rem/1 var(--mono);
+      transition: border-color .12s ease, background .12s ease, color .12s ease, transform .12s ease;
       user-select: none;
     }
-
-    .scale-option label:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.07);
-      color: var(--text);
-    }
-
+    .scale-option label:hover { border-color: #40505d; color: var(--ink); transform: translateY(-1px); }
+    .scale-option input:focus-visible + label { outline: 2px solid var(--cyan); outline-offset: 2px; }
     .scale-option input:checked + label {
-      background: linear-gradient(180deg, rgba(137,180,255,.4), rgba(201,156,255,.28));
-      border-color: rgba(183,208,255,.58);
-      color: var(--text);
-      box-shadow: 0 8px 24px rgba(137,180,255,.2);
+      border-color: var(--cyan);
+      background: linear-gradient(135deg, rgba(86,246,255,.16), rgba(255,63,180,.11));
+      color: #fff;
+      box-shadow: inset 0 -2px 0 var(--magenta), 0 0 18px rgba(86,246,255,.09);
     }
+    .question.missing { background: linear-gradient(90deg, rgba(255,95,121,.08), transparent 68%); outline: 1px solid rgba(255,95,121,.34); outline-offset: -1px; padding-inline: 12px; margin-inline: -12px; }
 
-    .question.missing {
-      border-radius: 14px;
-      background: rgba(255,142,163,.06);
-      padding-inline: 12px;
-      margin-inline: -12px;
-      border-top-color: transparent;
-      outline: 1px solid rgba(255,142,163,.16);
-    }
-
-    .results-wrap {
-      display: none;
-    }
-
-    .results-wrap.ready {
-      display: block;
-    }
-
-    .summary-grid {
+    .results-wrap { display: none; }
+    .results-wrap.ready { display: block; }
+    .results-head {
       display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 18px;
-      margin-top: 18px;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
+      gap: 36px;
+      padding: 28px 0 34px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-top: 28px;
+    }
+    .results-head h3 { margin-bottom: 10px; color: var(--cyan); font: 800 .74rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .compact-line { margin: 0; color: #d7dee6; font-size: 1rem; }
+    .code-block { margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); }
+    .mono { font-family: var(--mono); color: #cad5df; font-size: .8rem; line-height: 1.55; word-break: break-word; }
+    .result-family { margin-top: 14px; color: #aeb7c4; }
+    .inline-meta { display: flex; flex-wrap: wrap; gap: 7px 18px; margin-top: 18px; }
+    .pill {
+      display: inline-flex; gap: 6px; align-items: center;
+      padding: 0 0 2px;
+      border: 0; border-bottom: 1px solid #33404b; border-radius: 0;
+      background: none; color: #b8c2cc;
+      font: 700 .74rem/1.3 var(--mono);
     }
 
-    .result-callout {
-      border-radius: 20px;
-      border: 1px solid var(--line);
-      background: linear-gradient(180deg, rgba(137,180,255,.08), rgba(255,255,255,.03));
-      padding: 18px;
-    }
-
-    .mono {
-      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      font-size: 0.95rem;
-      white-space: pre-wrap;
-      word-break: break-word;
-      color: #dce8ff;
-    }
-
-    .compact-line {
-      font-size: 0.98rem;
-      color: var(--muted);
-      margin-top: 12px;
-    }
-
-    .chart-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 14px 16px;
-      margin-top: 20px;
-    }
-
-    .axis-card {
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      padding: 14px 14px 12px;
-      min-width: 0;
-    }
-
-    .axis-card-head {
+    .results-subhead {
       display: flex;
-      gap: 10px;
-      justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 10px;
-    }
-
-    .axis-card h4 {
-      margin: 0;
-      font-size: 1rem;
-    }
-
-    .axis-card small {
-      color: var(--muted);
-    }
-
-    .track {
-      position: relative;
-      height: 14px;
-      border-radius: 999px;
-      background: var(--track);
-      border: 1px solid rgba(255,255,255,.08);
-      overflow: visible;
-      margin: 10px 0 8px;
-    }
-
-    .track::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: -4px;
-      bottom: -4px;
-      width: 1px;
-      background: rgba(255,255,255,.24);
-    }
-
-    .marker {
-      position: absolute;
-      top: 50%;
-      width: 16px;
-      height: 16px;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, var(--accent) 45%, var(--accent-2) 80%);
-      border: 2px solid rgba(9,16,31,.85);
-      box-shadow: 0 0 0 3px rgba(255,255,255,.08), 0 8px 20px rgba(137,180,255,.24);
-    }
-
-    .track-labels {
-      display: flex;
       justify-content: space-between;
-      gap: 12px;
-      color: var(--muted);
-      font-size: 0.82rem;
+      gap: 16px;
+      margin: 44px 0 10px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line-hot);
     }
+    .results-subhead h3 { font-size: 1.25rem; }
+    .results-subhead span { color: var(--dim); font: 700 .7rem/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
 
-    .matches {
+    .axis-results { width: 100%; }
+    .axis-result-row {
       display: grid;
-      gap: 14px;
-      margin-top: 18px;
-    }
-
-    .match-card, .profile-card {
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.04);
-      padding: 16px;
-    }
-
-    .match-meta, .profile-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin: 6px 0 10px;
-    }
-
-    .key-splits {
-      margin: 16px 0 0;
-      padding-left: 18px;
-      color: var(--muted);
-    }
-
-    .table-wrap {
-      overflow-x: auto;
-      margin-top: 14px;
-      border-radius: 16px;
-      border: 1px solid var(--line);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      background: rgba(255,255,255,.02);
-    }
-
-    th, td {
-      padding: 12px 14px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,.06);
-      font-size: 0.95rem;
-    }
-
-    th {
-      color: #dbe6ff;
-      background: rgba(255,255,255,.04);
-      position: sticky;
-      top: 0;
-    }
-
-    td {
-      color: var(--muted);
-    }
-
-    .family-section {
-      margin-top: 26px;
-    }
-
-    .family-blurb {
-      color: var(--muted);
-      margin-bottom: 14px;
-      max-width: 86ch;
-    }
-
-    .family-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 18px;
-    }
-
-    .anchor-link {
-      display: inline-flex;
+      grid-template-columns: 160px 86px minmax(280px, 1.4fr) minmax(220px, .9fr);
+      gap: 20px;
       align-items: center;
-      border-radius: 999px;
-      padding: 7px 11px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid var(--line);
-      color: #d5e4ff;
-      font-size: 0.9rem;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,.055);
     }
+    .axis-result-name strong { display: block; font-size: .93rem; }
+    .axis-result-name small { color: var(--dim); font: 600 .68rem/1.3 var(--mono); }
+    .axis-result-score { color: var(--cyan); font: 800 .82rem/1 var(--mono); white-space: nowrap; }
+    .axis-result-meaning { color: var(--muted); font-size: .84rem; }
+    .track { position: relative; height: 4px; background: #18212a; overflow: visible; }
+    .track::before { content: ""; position: absolute; left: 50%; top: -4px; bottom: -4px; width: 1px; background: #3a4651; }
+    .track::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,63,180,.45), rgba(255,255,255,.05) 50%, rgba(86,246,255,.5)); opacity: .55; }
+    .marker { position: absolute; z-index: 2; top: 50%; width: 10px; height: 10px; transform: translate(-50%, -50%) rotate(45deg); background: var(--cyan); box-shadow: 0 0 12px rgba(86,246,255,.55); }
+    .track-labels { display: flex; justify-content: space-between; gap: 12px; margin-top: 7px; color: var(--dim); font: 600 .65rem/1.2 var(--mono); text-transform: uppercase; }
 
-    .small-muted {
-      color: var(--muted);
-      font-size: 0.92rem;
+    .match-list { border-top: 1px solid var(--line); }
+    .match-row {
+      display: grid;
+      grid-template-columns: 48px minmax(230px, .65fr) minmax(300px, 1.35fr);
+      gap: 20px;
+      padding: 22px 0 24px;
+      border-bottom: 1px solid var(--line);
     }
+    .match-rank { color: var(--magenta); font: 900 1.7rem/1 var(--mono); }
+    .match-title a { color: var(--ink); }
+    .match-title h3 { font-size: 1.18rem; }
+    .match-meta, .profile-meta { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 9px; color: var(--muted); font: 600 .72rem/1.4 var(--mono); }
+    .match-copy p { margin: 0 0 9px; color: #b4bdc7; }
+    .match-copy .mono { margin-top: 12px; }
+    .key-splits { margin: 12px 0 0; padding-left: 18px; color: var(--muted); font-size: .86rem; }
+    .key-splits li + li { margin-top: 5px; }
 
-    details {
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding: 10px 14px;
-      margin-top: 14px;
-    }
-
+    details { margin-top: 24px; padding: 0; border: 0; background: none; }
     summary {
       cursor: pointer;
-      font-weight: 700;
-      color: #dbe7ff;
+      list-style: none;
+      padding: 13px 0;
+      border-top: 1px solid var(--line-hot);
+      border-bottom: 1px solid var(--line-hot);
+      color: var(--cyan);
+      font: 800 .74rem/1.2 var(--mono);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+ "; color: var(--magenta); }
+    details[open] summary::before { content: "− "; }
+
+    .table-wrap { overflow-x: auto; margin-top: 0; border: 0; }
+    table { width: 100%; border-collapse: collapse; background: transparent; }
+    th, td { padding: 11px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.055); font-size: .82rem; vertical-align: top; }
+    th { position: sticky; top: 0; z-index: 1; background: #090d12; color: #8d99a6; font: 800 .7rem/1.2 var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+    td { color: #aeb7c1; }
+    tbody tr:hover td { background: rgba(86,246,255,.025); color: #d7dee5; }
+
+    .profile-toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) minmax(220px, 340px);
+      gap: 10px;
+      margin: 30px 0 26px;
+      padding: 12px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .profile-toolbar input, .profile-toolbar select {
+      width: 100%; min-height: 42px;
+      border: 1px solid #27313a; border-radius: 0;
+      background: #090d12; color: #d8e0e8;
+      padding: 9px 11px;
+      font: 600 .82rem/1 var(--mono);
+    }
+    .profile-toolbar input::placeholder { color: #596674; }
+
+    .family-links { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 28px; }
+    .anchor-link { padding: 2px 0; border: 0; border-bottom: 1px solid #25313a; border-radius: 0; background: none; color: #9cabb9; font-size: .82rem; }
+    .family-section { margin-top: 42px; }
+    .family-section[hidden] { display: none; }
+    .family-section > h3 { color: #eef2f6; font-size: 1.45rem; }
+    .family-blurb { max-width: 88ch; margin: 8px 0 18px; color: var(--muted); }
+    .profile-list { border-top: 1px solid var(--line-hot); }
+    .profile-row {
+      display: grid;
+      grid-template-columns: 54px minmax(220px, .7fr) minmax(320px, 1.3fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--line);
+      scroll-margin-top: 80px;
+    }
+    .profile-id { color: var(--magenta); font: 800 .8rem/1.2 var(--mono); }
+    .profile-name h4 { font-size: 1rem; }
+    .profile-name .mono { margin-top: 9px; color: #748290; }
+    .profile-copy { color: #aeb7c1; font-size: .9rem; }
+    .profile-row.search-hidden { display: none; }
+
+    .footer-note { margin-top: 28px; color: var(--muted); font-size: .88rem; }
+
+    @media (max-width: 1040px) {
+      .hero-grid, .legend, .results-head { grid-template-columns: 1fr; gap: 24px; }
+      .axis-result-row { grid-template-columns: 130px 72px minmax(250px, 1fr); }
+      .axis-result-meaning { grid-column: 3; }
+      .match-row, .profile-row { grid-template-columns: 44px minmax(200px, .8fr) minmax(260px, 1.2fr); }
     }
 
-    .footer-note {
-      margin-top: 28px;
-      color: var(--muted);
-      font-size: 0.93rem;
+    @media (max-width: 760px) {
+      .shell { width: min(calc(100% - 22px), var(--max)); padding-top: 12px; }
+      .hero { padding: 38px 0 26px; }
+      .hero::after { top: 20px; font-size: 3rem; }
+      h1 { font-size: clamp(2.5rem, 15vw, 4.7rem); }
+      .sticky-bar { margin: 0 -11px; padding: 10px 11px; gap: 10px; align-items: stretch; flex-direction: column; }
+      .actions { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+      button { min-height: 38px; padding: 8px 5px; font-size: .63rem; }
+      .section { padding-top: 48px; }
+      .legend-scale { gap: 2px; }
+      .legend-scale > div { padding-inline: 2px; }
+      .legend-scale .small-muted { display: none; }
+      .axis-header { grid-template-columns: 1fr; gap: 10px; }
+      .pole-pair { text-align: left; }
+      .question-label { grid-template-columns: 38px minmax(0,1fr); }
+      .option-row { grid-template-columns: repeat(7, minmax(34px, 1fr)); gap: 2px; }
+      .scale-option label { min-height: 42px; }
+      .results-head { margin-top: 18px; }
+      .axis-result-row { grid-template-columns: 1fr auto; gap: 8px 12px; padding: 16px 0; }
+      .axis-result-track { grid-column: 1 / -1; }
+      .axis-result-meaning { grid-column: 1 / -1; }
+      .match-row { grid-template-columns: 34px minmax(0,1fr); gap: 10px; }
+      .match-copy { grid-column: 2; }
+      .profile-toolbar { grid-template-columns: 1fr; }
+      .family-links { gap: 6px 12px; }
+      .profile-row { grid-template-columns: 34px minmax(0,1fr); gap: 10px; }
+      .profile-copy { grid-column: 2; }
+      th, td { white-space: nowrap; }
     }
 
-    @media (max-width: 1080px) {
-      .hero-grid,
-      .summary-grid,
-      .legend {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .chart-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .shell {
-        width: min(calc(100% - 18px), var(--max));
-      }
-
-      .hero,
-      .section {
-        padding: 18px;
-      }
-
-      .sticky-bar {
-        padding: 12px;
-      }
-
-      .option-row,
-      .scale-grid {
-        gap: 6px;
-      }
-
-      .scale-option label {
-        min-height: 38px;
-      }
-
-      .question-top {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
     }
   </style>
 </head>
 <body>
   <div class="shell">
     <header class="hero">
+      <div class="kicker">Political systems / multidimensional vector test</div>
       <h1>Political Economic Dimensions Test</h1>
-      <p class="lead">A multidimensional political-economic questionnaire that scores force, center, feud, common-good politics, anthropology, property, administration, economy, justice, coercion, two jurisprudence axes, philosophy of history, and productive ecology, then maps the result onto canonical attractor profiles.</p>
-      <p class="lead"><a href="https://www.youtube.com/@viatorinterra" target="_blank" rel="noopener noreferrer">Subscribe to Viator in Terra</a></p>
-      <div class="inline-meta">
-        <span class="pill">78 items</span>
-        <span class="pill">14 axes</span>
-        <span class="pill">profile chart</span>
-        <span class="pill">profile canons</span>
+      <p class="lead">A 78-item test across 14 political-economic dimensions. Results are scored by axis and compared with canonical attractor profiles.</p>
+      <p class="lead"><a href="https://www.youtube.com/@viatorinterra" target="_blank" rel="noopener noreferrer">Subscribe to Viator in Terra ↗</a></p>
+      <div class="hero-meta" aria-label="Test metadata">
+        <span>78 items</span><span>14 axes</span><span>profile chart</span><span>profile canons</span>
       </div>
 
       <div class="hero-grid">
@@ -714,6 +521,7 @@
     </div>
 
     <section class="section" id="questionnaireIntro">
+      <div class="section-kicker">01 / Questionnaire</div>
       <div class="legend">
         <div class="legend-card">
           <h3>Response scale</h3>
@@ -736,12 +544,14 @@
     </section>
 
     <section class="section results-wrap" id="resultsSection">
+      <div class="section-kicker">02 / Output</div>
       <h2>Results</h2>
       <p class="lead">Your result is a structured attractor map, not a courtroom verdict. A real thinker can be Lockean on law, Burkean on administration, Popperian on history, and district-federal on production all at once.</p>
       <div id="resultsBody"></div>
     </section>
 
     <section class="section" id="profilesSection">
+      <div class="section-kicker">03 / Canon</div>
       <h2>Canonical attractor profiles</h2>
       <p class="lead">Every result below auto-links into this canon. These are archetypes. A profile may land near the center of an axis not because it is moderate, but because it sits off that axis and operates through a different logic.</p>
       <div id="profileIndex"></div>
@@ -750,9 +560,9 @@
   </div>
 
   <script>
-    const AXES = [{"key": "F", "short": "Force", "title": "Monopoly of force / Non-monopoly of force", "left": "monopoly", "right": "non-monopoly", "higher": "non-monopoly of force", "items": [{"n": 1, "text": "A sound political order can contain multiple legitimate armed authorities at once.", "reverse": false}, {"n": 2, "text": "A single final monopolist of legitimate force is usually more dangerous than a divided coercive order.", "reverse": false}, {"n": 3, "text": "Overlapping jurisdictions of force are inherently chaotic and illegitimate.", "reverse": true}]}, {"key": "C", "short": "Center", "title": "Centralized / Polycentric", "left": "centralized", "right": "polycentric", "higher": "polycentric", "items": [{"n": 4, "text": "Different domains of common life should often be governed by different institutions rather than one supreme center.", "reverse": false}, {"n": 5, "text": "Local institutional variation is usually a strength rather than a defect.", "reverse": false}, {"n": 6, "text": "Durable order requires final decision-making authority to be concentrated at the top.", "reverse": true}]}, {"key": "Q", "short": "Feud", "title": "Private feud always illegitimate / Bounded feud-private war can be legitimate", "left": "anti-feud", "right": "bounded feud/private war legitimate", "higher": "bounded feud-private war can be legitimate", "items": [{"n": 7, "text": "Private feud or retaliatory violence is always illegitimate, regardless of custom.", "reverse": true}, {"n": 8, "text": "Under recognized custom, kin groups or private bodies may sometimes wage limited armed reprisals legitimately.", "reverse": false}, {"n": 9, "text": "Public order does not always require the complete abolition of feud-like forms.", "reverse": false}, {"n": 10, "text": "The only legitimate use of force is by public institutions or immediate individual self-defense.", "reverse": true}]}, {"key": "E", "short": "Ends", "title": "Liberal neutrality / Communitarian common-good politics", "left": "liberal neutrality", "right": "communitarian common benefit/interest", "higher": "communitarian common-good politics", "items": [{"n": 11, "text": "A regime should remain neutral among rival conceptions of the good life.", "reverse": true}, {"n": 12, "text": "Political order should uphold a substantive common benefit/interest, not merely protect private choice.", "reverse": false}, {"n": 13, "text": "Membership in a polity can rightly involve duties of loyalty, service, and sacrifice.", "reverse": false}, {"n": 14, "text": "Law should be concerned only with fair coexistence, not with the moral shape of communal life.", "reverse": true}, {"n": 15, "text": "A society that refuses any shared public ends tends toward disintegration.", "reverse": false}]}, {"key": "A", "short": "Anthropology", "title": "Atomized anthropology / Embedded anthropology", "left": "atomized", "right": "embedded", "higher": "embedded anthropology", "items": [{"n": 16, "text": "Human beings are best understood as members of households, traditions, and associations before they are abstract choosers.", "reverse": false}, {"n": 17, "text": "The isolated individual is the basic moral unit from which sound political theory must begin.", "reverse": true}, {"n": 18, "text": "Persons are formed by inherited practices and roles, not merely by acts of choice.", "reverse": false}, {"n": 19, "text": "Political theory goes astray when it imagines solitary individuals prior to substantive social bonds.", "reverse": false}, {"n": 20, "text": "Family, locality, and civic belonging are secondary add-ons to an otherwise complete individual self.", "reverse": true}]}, {"key": "P", "short": "Property", "title": "Strict private ownership / Mixed forms of holding and stewardship", "left": "strict private ownership", "right": "mixed stewardship", "higher": "mixed forms of holding and stewardship", "items": [{"n": 21, "text": "Trusts, commons, guild-like corporations, and stewardships can be fully legitimate forms of holding property.", "reverse": false}, {"n": 22, "text": "All rightful control over land and resources should ultimately reduce to private ownership by determinate persons or firms.", "reverse": true}, {"n": 23, "text": "Some goods are distorted when treated as if they were ordinary alienable private property.", "reverse": false}, {"n": 24, "text": "Functional jurisdictions and custodial responsibilities can sometimes govern assets more appropriately than full private title.", "reverse": false}, {"n": 25, "text": "Unowned or common things should always be rapidly privatized if possible.", "reverse": true}]}, {"key": "Adm", "short": "Administration", "title": "Personal-customary mediation / Impersonal administrative mediation", "left": "personal-customary", "right": "impersonal-administrative", "higher": "impersonal administrative mediation", "items": [{"n": 26, "text": "Large and complex societies require specialized administrative offices to mediate common life.", "reverse": false}, {"n": 27, "text": "Standardized procedure is usually superior to informal personal discretion in public matters.", "reverse": false}, {"n": 28, "text": "A mature order needs records, categories, and offices rather than relying mainly on face-to-face customary authority.", "reverse": false}, {"n": 29, "text": "Most disputes and obligations should be handled through known persons and customary standing rather than administrative process.", "reverse": true}, {"n": 30, "text": "Credentialed officials are often necessary for justice and coordination at scale.", "reverse": false}, {"n": 31, "text": "Heavy reliance on offices and procedures usually indicates social decay rather than political maturity.", "reverse": true}]}, {"key": "M", "short": "Economy", "title": "Market coordination / Planning and social ownership", "left": "market", "right": "planning/social ownership", "higher": "planning and social ownership", "items": [{"n": 32, "text": "Markets and voluntary exchange should be the default coordinator of economic life.", "reverse": true}, {"n": 33, "text": "Key sectors may rightly be governed by planning, allocation, or social ownership rather than market price alone.", "reverse": false}, {"n": 34, "text": "Wage labor and private enterprise are normal and legitimate foundations of economic order.", "reverse": true}, {"n": 35, "text": "Strategic industries are too important to leave entirely to decentralized market incentives.", "reverse": false}, {"n": 36, "text": "Public, cooperative, or communal ownership of major productive assets can be preferable to private capital.", "reverse": false}, {"n": 37, "text": "Profitability is usually the best guide to whether a productive arrangement should persist.", "reverse": true}]}, {"key": "J", "short": "Justice", "title": "Entitlement justice / Egalitarian-patterned justice", "left": "entitlement", "right": "egalitarian-patterned", "higher": "egalitarian-patterned justice", "items": [{"n": 38, "text": "Justice is mainly about respecting legitimate holdings and fair procedures, not about patterning outcomes.", "reverse": true}, {"n": 39, "text": "Large inequalities are politically suspect even when they arise without obvious theft or fraud.", "reverse": false}, {"n": 40, "text": "Redistribution can be a central demand of justice, not merely an emergency expedient.", "reverse": false}, {"n": 41, "text": "Extreme concentration of wealth tends to corrupt the common benefit/interest.", "reverse": false}, {"n": 42, "text": "As long as acquisitions are voluntary, the resulting distribution is presumptively just.", "reverse": true}]}, {"key": "O", "short": "Coercion", "title": "Narrow coercive scope / Broad formative-preservative communal coercion", "left": "narrow coercion", "right": "broad formative-preservative coercion", "higher": "broad formative-preservative communal coercion", "items": [{"n": 43, "text": "Coercion is legitimate only for defense against aggression and restitution for wrongs.", "reverse": true}, {"n": 44, "text": "A community may legitimately coerce for order, discipline, and preservation, not just defense.", "reverse": false}, {"n": 45, "text": "Law may shape conduct beyond the mere prevention of invasion.", "reverse": false}, {"n": 46, "text": "Public authority may sometimes suppress practices that corrode a shared way of life even when they are privately consensual.", "reverse": false}, {"n": 47, "text": "It is illegitimate for law to cultivate civic virtue or public character.", "reverse": true}, {"n": 48, "text": "Protection of the common order can justify coercive duties of service, contribution, or training.", "reverse": false}, {"n": 49, "text": "The purpose of law is exhausted by securing peaceful non-interference.", "reverse": true}, {"n": 50, "text": "Common institutions may require binding obligations that are not reducible to private contract.", "reverse": false}]}, {"key": "Lp", "short": "Law I", "title": "Proprietarian-title law / Non-proprietarian law", "left": "proprietarian-title law", "right": "non-proprietarian law", "higher": "non-proprietarian law", "items": [{"n": 51, "text": "A sound legal order should be derivable from a few simple universal principles such as title, consent, and nonaggression.", "reverse": true}, {"n": 52, "text": "Ownership claims and contractual transfer are the primary grammar of justice.", "reverse": true}, {"n": 53, "text": "The legitimacy of law should not depend on inherited institutions so long as title and consent are clear.", "reverse": true}, {"n": 54, "text": "A legal order may rightly rest on duties, offices, status-relations, or public purposes that are not reducible to property and contract.", "reverse": false}, {"n": 55, "text": "Some genuine legal obligations arise from membership, function, or office rather than voluntary agreement alone.", "reverse": false}, {"n": 56, "text": "Not every valid claim in law can be translated into ownership rights and consensual exchange.", "reverse": false}]}, {"key": "Lc", "short": "Law II", "title": "Customary-prudential law / Administrative-command law", "left": "customary-prudential law", "right": "administrative-command law", "higher": "administrative-command law", "items": [{"n": 57, "text": "Law grows out of custom, practice, and accumulated judgment rather than design from above.", "reverse": true}, {"n": 58, "text": "Equity is often necessary because strict rule-application cannot do justice in every case.", "reverse": true}, {"n": 59, "text": "Longstanding communal practice can generate genuine legal authority even without explicit enactment.", "reverse": true}, {"n": 60, "text": "Law that ignores local practice and inherited forms is usually brittle and destructive.", "reverse": true}, {"n": 61, "text": "Large modern orders need centrally promulgated rules and official hierarchies more than local inherited norms.", "reverse": false}, {"n": 62, "text": "A judge or magistrate should usually prioritize enacted policy and administrative purpose over customary expectation.", "reverse": false}, {"n": 63, "text": "Uniform command and formal procedure are usually preferable to locally variable equitable judgment.", "reverse": false}, {"n": 64, "text": "In complex societies, legal order is secured primarily by authoritative enactment, records, and compliance structures rather than custom.", "reverse": false}]}, {"key": "H", "short": "History", "title": "Fallibilist anti-historicism / Historicist teleology", "left": "anti-historicist", "right": "historicist-teleological", "higher": "historicist teleology", "items": [{"n": 65, "text": "Politics should proceed by piecemeal correction rather than claims to know history’s direction.", "reverse": true}, {"n": 66, "text": "History has an intelligible direction that political action can consciously advance.", "reverse": false}, {"n": 67, "text": "Revolutionary rupture can be rationally required by deep structural contradictions in an order.", "reverse": false}, {"n": 68, "text": "Appeals to historical destiny are usually masks for dogmatism and abuse.", "reverse": true}, {"n": 69, "text": "Social formations unfold according to large developmental patterns rather than pure contingency.", "reverse": false}, {"n": 70, "text": "It is possible to know enough about historical development to justify radical transformation.", "reverse": false}, {"n": 71, "text": "Good politics is mostly a matter of institutional trial and error, not historical mission.", "reverse": true}, {"n": 72, "text": "Some regimes become illegitimate because they stand against the next stage of historical development.", "reverse": false}]}, {"key": "D", "short": "Production", "title": "Concentrated mass production / Distributed district production", "left": "concentrated production", "right": "distributed district production", "higher": "distributed district production", "items": [{"n": 73, "text": "Advanced economies naturally and desirably tend toward giant firms and concentrated production.", "reverse": true}, {"n": 74, "text": "Dense networks of small firms, cooperatives, workshops, and regional districts can outperform centralized mass-capital.", "reverse": false}, {"n": 75, "text": "Local productive ecologies matter more than sheer scale for long-run social health.", "reverse": false}, {"n": 76, "text": "Economic vitality depends heavily on embedded supplier networks, vocational cultures, and place-based cooperation.", "reverse": false}, {"n": 77, "text": "National champions and large integrated corporations are usually superior to district-based productive orders.", "reverse": true}, {"n": 78, "text": "A healthy economy should preserve room for small and medium production rather than forcing concentration.", "reverse": false}]}];
-    const PROFILES = [{"id": "01", "name": "Lockean classical liberal", "family": "Liberal and post-liberal state forms", "slug": "lockean-classical-liberal", "code": {"F": -1, "C": -1, "Q": -2, "E": -2, "A": -1, "P": -2, "Adm": -1, "M": -2, "J": -2, "O": -2, "Lp": -2, "Lc": 0, "H": -2, "D": 0}, "summary": "Rights, consent, and limited government anchor the order. Property and civil freedom are central, distribution is secondary, and law leans strongly toward title and contract rather than communal purpose or administrative command."}, {"id": "02", "name": "Nozickian minarchism", "family": "Liberal and post-liberal state forms", "slug": "nozickian-minarchism", "code": {"F": -1, "C": -1, "Q": -2, "E": -2, "A": -2, "P": -2, "Adm": -2, "M": -2, "J": -2, "O": -2, "Lp": -2, "Lc": 0, "H": -2, "D": 0}, "summary": "The night-watchman state pushed close to its limit. Coercion is kept extremely narrow, administration is minimal, and legal order is built around title, consent, and nonaggression."}, {"id": "03", "name": "Neoliberal / ordoliberal constitutionalism", "family": "Liberal and post-liberal state forms", "slug": "neoliberal-ordoliberal-constitutionalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -2, "A": -1, "P": -1, "Adm": 1, "M": -2, "J": -1, "O": -1, "Lp": -1, "Lc": 1, "H": -2, "D": -1}, "summary": "Markets remain primary, but they are constitutionally framed by competition policy, monetary order, and institutional guardrails. It is more administrative than classical liberalism, yet still anti-historicist and broadly liberal."}, {"id": "04", "name": "Rawlsian egalitarian liberalism", "family": "Liberal and post-liberal state forms", "slug": "rawlsian-egalitarian-liberalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -2, "A": -1, "P": 0, "Adm": 1, "M": -1, "J": 2, "O": -1, "Lp": 1, "Lc": 0, "H": -2, "D": 0}, "summary": "Still liberal in its aspiration to public neutrality, but much more redistributive than Locke or Nozick. Justice is patterned more by fairness than by pure entitlement, while law is less proprietarian-title-centered."}, {"id": "05", "name": "Welfare-state social liberalism", "family": "Liberal and post-liberal state forms", "slug": "welfare-state-social-liberalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -1, "A": 0, "P": 0, "Adm": 2, "M": 0, "J": 1, "O": 0, "Lp": 1, "Lc": 1, "H": -2, "D": 0}, "summary": "The practical regime of social insurance, public services, and regulated capitalism. It is more institutional and managerial than philosophically elegant, and comfortable with bureaucracy as a normal tool of governance."}, {"id": "06", "name": "Popperian open-society liberalism", "family": "Liberal and post-liberal state forms", "slug": "popperian-open-society-liberalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -2, "A": -1, "P": 0, "Adm": 0, "M": -1, "J": -1, "O": -1, "Lp": 0, "Lc": 0, "H": -2, "D": 0}, "summary": "Defined above all by anti-historicism and piecemeal reform. It distrusts grand historical missions, prefers reversible institutional correction, and is less rigid about property theory than harder-edged liberalisms."}, {"id": "07", "name": "Technocratic managerialism", "family": "Managerial and expert-rule profiles", "slug": "technocratic-managerialism", "code": {"F": -2, "C": -1, "Q": -2, "E": -1, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": 0, "O": 1, "Lp": 2, "Lc": 2, "H": 0, "D": -1}, "summary": "Experts, agencies, metrics, compliance, and optimization sit at the center of rule. It is neither title-contract jurisprudence nor customary-prudential law so much as administrative governance by office, procedure, and policy."}, {"id": "08", "name": "Progressive managerialism", "family": "Managerial and expert-rule profiles", "slug": "progressive-managerialism", "code": {"F": -2, "C": -1, "Q": -2, "E": 0, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": 1, "O": 1, "Lp": 2, "Lc": 2, "H": 1, "D": -1}, "summary": "Technocratic management with a stronger moralized inclusionary ethic. It expands administrative oversight, anti-discrimination enforcement, and norm-shaping bureaucracy while often presenting itself as neutral."}, {"id": "09", "name": "Developmental technocracy", "family": "Managerial and expert-rule profiles", "slug": "developmental-technocracy", "code": {"F": -2, "C": -2, "Q": -2, "E": 0, "A": 1, "P": 0, "Adm": 2, "M": 1, "J": 0, "O": 1, "Lp": 2, "Lc": 2, "H": 1, "D": -2}, "summary": "The planner-engineer state that treats growth, industrial upgrading, and infrastructural capacity as the decisive ends. Its jurisprudence is administrative-command oriented and its production model tends toward scale and concentration."}, {"id": "10", "name": "Hobbesian sovereigntism", "family": "Conservative, civic, and confessional forms", "slug": "hobbesian-sovereigntism", "code": {"F": -2, "C": -2, "Q": -2, "E": 0, "A": -2, "P": -1, "Adm": 1, "M": 0, "J": -1, "O": 2, "Lp": 1, "Lc": 2, "H": -2, "D": 0}, "summary": "A unified sovereign suppresses insecurity, feud, and fragmentation through overwhelming final authority. Property and law exist under sovereign order rather than prior to it, and command outranks custom."}, {"id": "11", "name": "Burkean traditional conservatism", "family": "Conservative, civic, and confessional forms", "slug": "burkean-traditional-conservatism", "code": {"F": -2, "C": 0, "Q": -2, "E": 1, "A": 1, "P": 1, "Adm": 0, "M": -1, "J": -1, "O": 0, "Lp": 1, "Lc": -2, "H": -2, "D": 0}, "summary": "Inheritance, prudence, local forms, and institutional memory matter more than abstract design. It is communitarian-leaning, embedded in social forms, and strongly attached to customary-prudential law."}, {"id": "12", "name": "Classical civic republicanism", "family": "Conservative, civic, and confessional forms", "slug": "classical-civic-republicanism", "code": {"F": -1, "C": 0, "Q": -2, "E": 2, "A": 1, "P": 0, "Adm": 0, "M": 0, "J": 0, "O": 1, "Lp": 1, "Lc": -1, "H": -1, "D": 0}, "summary": "Public virtue, anti-corruption, mixed constitution, and active citizenship define the regime. It is not liberal-neutral, and it expects civic character and shared ends."}, {"id": "13", "name": "Catholic integralism / confessional corporatism", "family": "Conservative, civic, and confessional forms", "slug": "catholic-integralism-confessional-corporatism", "code": {"F": -1, "C": 0, "Q": -2, "E": 2, "A": 2, "P": 1, "Adm": 0, "M": 0, "J": 0, "O": 2, "Lp": 2, "Lc": -1, "H": -1, "D": 0}, "summary": "The polity is ordered toward substantive truth and common benefit/interest, not liberal neutrality. Family, church, and corporate bodies mediate life, and law is non-proprietarian without becoming fully administrative-command."}, {"id": "14", "name": "Distributism", "family": "Conservative, civic, and confessional forms", "slug": "distributism", "code": {"F": 0, "C": 1, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": -1, "M": -1, "J": 1, "O": 0, "Lp": 2, "Lc": -2, "H": -2, "D": 2}, "summary": "Property should be widely dispersed rather than abolished or concentrated. It combines moralized common-good politics with local production, mixed stewardship, and a strong attachment to customary-prudential legal form."}, {"id": "15", "name": "Guild socialism", "family": "Conservative, civic, and confessional forms", "slug": "guild-socialism", "code": {"F": 0, "C": 1, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 1, "J": 1, "O": 0, "Lp": 2, "Lc": 0, "H": 0, "D": 1}, "summary": "Socialism through organized functions, guilds, and producer bodies rather than through a pure centralized command state. It is associative, communal, and structurally pluralist."}, {"id": "16", "name": "Third Italy / Swiss district federalism", "family": "Conservative, civic, and confessional forms", "slug": "third-italy-swiss-district-federalism", "code": {"F": -1, "C": 2, "Q": -2, "E": 1, "A": 1, "P": 1, "Adm": -1, "M": -2, "J": 1, "O": 0, "Lp": 1, "Lc": -2, "H": -2, "D": 2}, "summary": "Federal, district-based, SME-heavy, and intensely place-bound. It likes markets, but in local productive ecologies with customary-prudential institutions and distributed production."}, {"id": "17", "name": "Classical ancap", "family": "Proprietarian and anarchic market forms", "slug": "classical-ancap", "code": {"F": 2, "C": 2, "Q": -2, "E": -2, "A": -2, "P": -2, "Adm": -2, "M": -2, "J": -2, "O": -2, "Lp": -2, "Lc": 0, "H": -2, "D": 0}, "summary": "The pure property-contract corner: non-monopoly force, polycentric adjudication, strict private ownership, narrow coercion, and a jurisprudence centered almost entirely on title and consent."}, {"id": "18", "name": "Hoppean covenantal proprietarianism", "family": "Proprietarian and anarchic market forms", "slug": "hoppean-covenantal-proprietarianism", "code": {"F": 2, "C": 2, "Q": -2, "E": 1, "A": 1, "P": -2, "Adm": -1, "M": -2, "J": -1, "O": 0, "Lp": -2, "Lc": 0, "H": -2, "D": 1}, "summary": "Still grounded in ownership and contract, but no longer liberal-neutral. Covenant spaces can carry thick norms and exclusion, even while the legal core remains hard proprietarian."}, {"id": "19", "name": "Proudhonian mutualism", "family": "Proprietarian and anarchic market forms", "slug": "proudhonian-mutualism", "code": {"F": 2, "C": 2, "Q": -2, "E": 1, "A": 1, "P": 1, "Adm": -1, "M": -1, "J": 1, "O": -1, "Lp": 1, "Lc": -1, "H": -1, "D": 2}, "summary": "Exchange and mutual credit remain central, but rentier ownership is transformed and federation matters. It is polycentric, anti-centralized, and oriented toward distributed production rather than giant capital."}, {"id": "20", "name": "Kropotkinian anarchist communism", "family": "Proprietarian and anarchic market forms", "slug": "kropotkinian-anarchist-communism", "code": {"F": 2, "C": 2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": -2, "M": 2, "J": 2, "O": 0, "Lp": 2, "Lc": -1, "H": 0, "D": 2}, "summary": "Mutual aid, federation, and decentralized communism without a coercive state center. It is communitarian, anti-hierarchical, egalitarian, and strongly committed to commons and stewardship."}, {"id": "21", "name": "Anarcho-syndicalism", "family": "Proprietarian and anarchic market forms", "slug": "anarcho-syndicalism", "code": {"F": 2, "C": 2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 2, "J": 2, "O": 0, "Lp": 2, "Lc": 0, "H": 1, "D": 1}, "summary": "Worker power through federated syndicates and labor associations. More structured than Kropotkinian communism, but still decentralized relative to party-state socialism."}, {"id": "22", "name": "Orthodox Marxism", "family": "Socialist and Marxist forms", "slug": "orthodox-marxism", "code": {"F": 0, "C": 1, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 2, "J": 2, "O": 1, "Lp": 2, "Lc": 0, "H": 2, "D": -1}, "summary": "Defined less by a fixed constitutional blueprint than by class analysis and historical development. Historicist teleology is decisive, while legal form is subordinate to deeper social structure."}, {"id": "23", "name": "Marxist-Leninism", "family": "Socialist and Marxist forms", "slug": "marxist-leninism", "code": {"F": -2, "C": -2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 2, "M": 2, "J": 1, "O": 2, "Lp": 2, "Lc": 2, "H": 2, "D": -2}, "summary": "The classic party-state form: centralized, bureaucratic, planned, and disciplined. It combines historicist certainty with strong administrative-command jurisprudence."}, {"id": "24", "name": "Trotskyism", "family": "Socialist and Marxist forms", "slug": "trotskyism", "code": {"F": -1, "C": -2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 1, "M": 2, "J": 2, "O": 2, "Lp": 2, "Lc": 1, "H": 2, "D": -2}, "summary": "Near Marxist-Leninism on many axes, but more suspicious of bureaucratic hardening and more explicitly revolutionary-internationalist. It remains strongly historicist and socialist."}, {"id": "25", "name": "Maoism", "family": "Socialist and Marxist forms", "slug": "maoism", "code": {"F": -2, "C": -2, "Q": -1, "E": 2, "A": 2, "P": 2, "Adm": 1, "M": 2, "J": 2, "O": 2, "Lp": 2, "Lc": 1, "H": 2, "D": 0}, "summary": "Combines central party power with mass-line mobilization, voluntarism, and rural revolutionary emphasis. It is less purely technocratic than Soviet-style Leninism."}, {"id": "26", "name": "Market socialism", "family": "Socialist and Marxist forms", "slug": "market-socialism", "code": {"F": -1, "C": 0, "Q": -2, "E": 0, "A": 1, "P": 2, "Adm": 1, "M": 1, "J": 1, "O": 0, "Lp": 1, "Lc": 0, "H": 0, "D": 0}, "summary": "Markets remain, but control of capital and ownership patterns are transformed. It sits between social democracy and command socialism."}, {"id": "27", "name": "Social democracy", "family": "Socialist and Marxist forms", "slug": "social-democracy", "code": {"F": -2, "C": 0, "Q": -2, "E": 0, "A": 0, "P": 0, "Adm": 2, "M": 0, "J": 2, "O": 0, "Lp": 1, "Lc": 1, "H": -1, "D": 0}, "summary": "Laborist redistribution without abolishing capitalism. It is more statist and administrative than guild socialism, less revolutionary than Marxism, and more egalitarian than classical liberalism."}, {"id": "28", "name": "Developmental statism / state capitalism", "family": "National-developmental and corporatist-authoritarian forms", "slug": "developmental-statism-state-capitalism", "code": {"F": -2, "C": -2, "Q": -2, "E": 1, "A": 1, "P": 0, "Adm": 2, "M": 1, "J": 0, "O": 1, "Lp": 2, "Lc": 2, "H": 1, "D": -2}, "summary": "A strong state uses firms, banks, and strategic sectors to build industrial power. It is production-first, high-capacity, and comfortable with concentrated productive organization."}, {"id": "29", "name": "Fascist / national-corporatist mobilization", "family": "National-developmental and corporatist-authoritarian forms", "slug": "fascist-national-corporatist-mobilization", "code": {"F": -2, "C": -2, "Q": -2, "E": 2, "A": 2, "P": 0, "Adm": 2, "M": 1, "J": -1, "O": 2, "Lp": 2, "Lc": 2, "H": 1, "D": -2}, "summary": "Mobilized national unity, anti-pluralism, and functional or party command define the form. It is not just authoritarian capitalism; it is purposive, centralized, and heavily disciplinary."}, {"id": "30", "name": "Bonapartist / bureaucratic Caesarism", "family": "National-developmental and corporatist-authoritarian forms", "slug": "bonapartist-bureaucratic-caesarism", "code": {"F": -2, "C": -2, "Q": -2, "E": 0, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": -1, "O": 2, "Lp": 2, "Lc": 2, "H": 0, "D": -1}, "summary": "A plebiscitary executive state resting on army, bureaucracy, and administrative centralization. It is less doctrinal than fascism or Leninism, but still heavy on command and hierarchy."}, {"id": "31", "name": "Neo-feudal / medieval pluralism", "family": "Premodern, localist, and plural-jurisdiction forms", "slug": "neo-feudal-medieval-pluralism", "code": {"F": 2, "C": 2, "Q": 1, "E": 2, "A": 2, "P": 2, "Adm": -2, "M": 0, "J": -1, "O": 2, "Lp": 2, "Lc": -2, "H": -2, "D": 2}, "summary": "Layered lords, estates, guilds, charters, and overlapping jurisdictions. It is plural, embedded, customary, and willing to tolerate bounded feud more than modern anti-feud orders."}, {"id": "32", "name": "Tribal customary confederation", "family": "Premodern, localist, and plural-jurisdiction forms", "slug": "tribal-customary-confederation", "code": {"F": 2, "C": 2, "Q": 2, "E": 2, "A": 2, "P": 2, "Adm": -2, "M": 0, "J": 0, "O": 2, "Lp": 2, "Lc": -2, "H": -2, "D": 2}, "summary": "Kin-centered, customary, and held together by elders, retaliation norms, and confederated relations. It is strongly embedded and radically non-administrative."}, {"id": "33", "name": "Proprietary communal empire", "family": "Premodern, localist, and plural-jurisdiction forms", "slug": "proprietary-communal-empire", "code": {"F": 1, "C": 2, "Q": -1, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 0, "J": 0, "O": 2, "Lp": 1, "Lc": -1, "H": -1, "D": 1}, "summary": "Neither Leviathan nor pure anarchism: a layered communitarian order with shared strategic goods, real common burdens, and multiple jurisdictions that remain coordinated rather than fully fused."}, {"id": "34", "name": "Ordoliberal social market constitutionalism", "family": "Transitional and hybrid modern profiles", "slug": "ordoliberal-social-market-constitutionalism", "code": {"F": -2, "C": 0, "Q": -2, "E": -1, "A": 0, "P": -1, "Adm": 1, "M": -1, "J": 1, "O": 0, "Lp": -1, "Lc": 1, "H": -2, "D": 0}, "summary": "Markets need a strong framework-state to remain competitive and humane. More social and more institution-heavy than generic neoliberalism, but still anti-historicist and anti-revolutionary."}, {"id": "35", "name": "Progressive social-democratic managerialism", "family": "Transitional and hybrid modern profiles", "slug": "progressive-social-democratic-managerialism", "code": {"F": -2, "C": -1, "Q": -2, "E": 0, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": 2, "O": 1, "Lp": 1, "Lc": 2, "H": 1, "D": -1}, "summary": "High administration, strong anti-discrimination enforcement, redistributive legitimacy, and expert rule without abandoning large-scale corporate structures. It sits between social democracy and progressive managerialism."}, {"id": "36", "name": "National-populist developmentalism", "family": "Transitional and hybrid modern profiles", "slug": "national-populist-developmentalism", "code": {"F": -2, "C": -2, "Q": -2, "E": 2, "A": 1, "P": 0, "Adm": 1, "M": 0, "J": 0, "O": 1, "Lp": 1, "Lc": 2, "H": 1, "D": -1}, "summary": "Anti-managerial in style but still statist in structure. It mixes executive centralization, national rhetoric, and developmental priorities with a stronger common-good or national identity frame."}];
-    const FAMILY_DESCRIPTIONS = {"Liberal and post-liberal state forms": "Liberal orders prioritize rights, consent, neutrality, and anti-historicist reform, but differ sharply over redistribution, administration, and how soft property becomes under social correction.", "Managerial and expert-rule profiles": "These profiles are defined less by inherited custom or title-contract jurisprudence than by agencies, expertise, metrics, policy steering, and institutional optimization.", "Conservative, civic, and confessional forms": "These attractors lean toward embedded anthropology, substantive common benefit/interests, and thicker public membership, though they range from prudential traditionalism to explicit confessional ordering.", "Proprietarian and anarchic market forms": "These profiles reject a final monopolist or sharply narrow the state, while centering contract, federation, mutual aid, or covenantal space in different combinations.", "Socialist and Marxist forms": "These attractors are marked by social ownership, planning or transformed capital control, stronger egalitarian commitments, and varying degrees of historicist confidence.", "National-developmental and corporatist-authoritarian forms": "These profiles centralize force and administration around nation, mobilization, development, or executive command, often favoring concentrated productive capacity.", "Premodern, localist, and plural-jurisdiction forms": "These orders are layered, customary, communal, and often non-monopoly or polycentric, with low formal administration and stronger tolerance for status or overlapping jurisdictions.", "Transitional and hybrid modern profiles": "These profiles sit between cleaner doctrines, combining market frameworks, managerial correction, nationalism, or social-democratic administration in hybrid modern forms."};
+    const AXES = [{"key": "F", "short": "Force", "title": "Monopoly of force / Non-monopoly of force", "left": "monopoly", "right": "non-monopoly", "higher": "non-monopoly of force", "items": [{"n": 1, "text": "A sound political order can contain multiple legitimate armed authorities at once.", "reverse": false}, {"n": 2, "text": "A single final monopolist of legitimate force is usually more dangerous than a divided coercive order.", "reverse": false}, {"n": 3, "text": "Overlapping jurisdictions of force are inherently chaotic and illegitimate.", "reverse": true}]}, {"key": "C", "short": "Center", "title": "Centralized / Polycentric", "left": "centralized", "right": "polycentric", "higher": "polycentric", "items": [{"n": 4, "text": "Different domains of common life should often be governed by different institutions rather than one supreme center.", "reverse": false}, {"n": 5, "text": "Local institutional variation is usually a strength rather than a defect.", "reverse": false}, {"n": 6, "text": "Durable order requires final decision-making authority to be concentrated at the top.", "reverse": true}]}, {"key": "Q", "short": "Feud", "title": "Private feud always illegitimate / Bounded feud-private war can be legitimate", "left": "anti-feud", "right": "bounded feud/private war legitimate", "higher": "bounded feud-private war can be legitimate", "items": [{"n": 7, "text": "Private feud or retaliatory violence is always illegitimate, regardless of custom.", "reverse": true}, {"n": 8, "text": "Under recognized custom, kin groups or private bodies may sometimes wage limited armed reprisals legitimately.", "reverse": false}, {"n": 9, "text": "Public order does not always require the complete abolition of feud-like forms.", "reverse": false}, {"n": 10, "text": "The only legitimate use of force is by public institutions or immediate individual self-defense.", "reverse": true}]}, {"key": "E", "short": "Ends", "title": "Liberal neutrality / Communitarian common benefit/interest", "left": "liberal neutrality", "right": "communitarian common benefit/interest", "higher": "communitarian common benefit/interest", "items": [{"n": 11, "text": "A regime should remain neutral among rival conceptions of the good life.", "reverse": true}, {"n": 12, "text": "Political order should uphold a substantive common benefit/interest, not merely protect private choice.", "reverse": false}, {"n": 13, "text": "Membership in a polity can rightly involve duties of loyalty, service, and sacrifice.", "reverse": false}, {"n": 14, "text": "Law should be concerned only with fair coexistence, not with the moral shape of communal life.", "reverse": true}, {"n": 15, "text": "A society that refuses any shared public ends tends toward disintegration.", "reverse": false}]}, {"key": "A", "short": "Anthropology", "title": "Atomized anthropology / Embedded anthropology", "left": "atomized", "right": "embedded", "higher": "embedded anthropology", "items": [{"n": 16, "text": "Human beings are best understood as members of households, traditions, and associations before they are abstract choosers.", "reverse": false}, {"n": 17, "text": "The isolated individual is the basic moral unit from which sound political theory must begin.", "reverse": true}, {"n": 18, "text": "Persons are formed by inherited practices and roles, not merely by acts of choice.", "reverse": false}, {"n": 19, "text": "Political theory goes astray when it imagines solitary individuals prior to substantive social bonds.", "reverse": false}, {"n": 20, "text": "Family, locality, and civic belonging are secondary add-ons to an otherwise complete individual self.", "reverse": true}]}, {"key": "P", "short": "Property", "title": "Strict private ownership / Mixed forms of holding and stewardship", "left": "strict private ownership", "right": "mixed stewardship", "higher": "mixed forms of holding and stewardship", "items": [{"n": 21, "text": "Trusts, commons, guild-like corporations, and stewardships can be fully legitimate forms of holding property.", "reverse": false}, {"n": 22, "text": "All rightful control over land and resources should ultimately reduce to private ownership by determinate persons or firms.", "reverse": true}, {"n": 23, "text": "Some goods are distorted when treated as if they were ordinary alienable private property.", "reverse": false}, {"n": 24, "text": "Functional jurisdictions and custodial responsibilities can sometimes govern assets more appropriately than full private title.", "reverse": false}, {"n": 25, "text": "Unowned or common things should always be rapidly privatized if possible.", "reverse": true}]}, {"key": "Adm", "short": "Administration", "title": "Personal-customary mediation / Impersonal administrative mediation", "left": "personal-customary", "right": "impersonal-administrative", "higher": "impersonal administrative mediation", "items": [{"n": 26, "text": "Large and complex societies require specialized administrative offices to mediate common life.", "reverse": false}, {"n": 27, "text": "Standardized procedure is usually superior to informal personal discretion in public matters.", "reverse": false}, {"n": 28, "text": "A mature order needs records, categories, and offices rather than relying mainly on face-to-face customary authority.", "reverse": false}, {"n": 29, "text": "Most disputes and obligations should be handled through known persons and customary standing rather than administrative process.", "reverse": true}, {"n": 30, "text": "Credentialed officials are often necessary for justice and coordination at scale.", "reverse": false}, {"n": 31, "text": "Heavy reliance on offices and procedures usually indicates social decay rather than political maturity.", "reverse": true}]}, {"key": "M", "short": "Economy", "title": "Market coordination / Planning and social ownership", "left": "market", "right": "planning/social ownership", "higher": "planning and social ownership", "items": [{"n": 32, "text": "Markets and voluntary exchange should be the default coordinator of economic life.", "reverse": true}, {"n": 33, "text": "Key sectors may rightly be governed by planning, allocation, or social ownership rather than market price alone.", "reverse": false}, {"n": 34, "text": "Wage labor and private enterprise are normal and legitimate foundations of economic order.", "reverse": true}, {"n": 35, "text": "Strategic industries are too important to leave entirely to decentralized market incentives.", "reverse": false}, {"n": 36, "text": "Public, cooperative, or communal ownership of major productive assets can be preferable to private capital.", "reverse": false}, {"n": 37, "text": "Profitability is usually the best guide to whether a productive arrangement should persist.", "reverse": true}]}, {"key": "J", "short": "Justice", "title": "Entitlement justice / Egalitarian-patterned justice", "left": "entitlement", "right": "egalitarian-patterned", "higher": "egalitarian-patterned justice", "items": [{"n": 38, "text": "Justice is mainly about respecting legitimate holdings and fair procedures, not about patterning outcomes.", "reverse": true}, {"n": 39, "text": "Large inequalities are politically suspect even when they arise without obvious theft or fraud.", "reverse": false}, {"n": 40, "text": "Redistribution can be a central demand of justice, not merely an emergency expedient.", "reverse": false}, {"n": 41, "text": "Extreme concentration of wealth tends to corrupt the common benefit/interest.", "reverse": false}, {"n": 42, "text": "As long as acquisitions are voluntary, the resulting distribution is presumptively just.", "reverse": true}]}, {"key": "O", "short": "Coercion", "title": "Narrow coercive scope / Broad formative-preservative communal coercion", "left": "narrow coercion", "right": "broad formative-preservative coercion", "higher": "broad formative-preservative communal coercion", "items": [{"n": 43, "text": "Coercion is legitimate only for defense against aggression and restitution for wrongs.", "reverse": true}, {"n": 44, "text": "A community may legitimately coerce for order, discipline, and preservation, not just defense.", "reverse": false}, {"n": 45, "text": "Law may shape conduct beyond the mere prevention of invasion.", "reverse": false}, {"n": 46, "text": "Public authority may sometimes suppress practices that corrode a shared way of life even when they are privately consensual.", "reverse": false}, {"n": 47, "text": "It is illegitimate for law to cultivate civic virtue or public character.", "reverse": true}, {"n": 48, "text": "Protection of the common order can justify coercive duties of service, contribution, or training.", "reverse": false}, {"n": 49, "text": "The purpose of law is exhausted by securing peaceful non-interference.", "reverse": true}, {"n": 50, "text": "Common institutions may require binding obligations that are not reducible to private contract.", "reverse": false}]}, {"key": "Lp", "short": "Law I", "title": "Proprietarian-title law / Non-proprietarian law", "left": "proprietarian-title law", "right": "non-proprietarian law", "higher": "non-proprietarian law", "items": [{"n": 51, "text": "A sound legal order should be derivable from a few simple universal principles such as title, consent, and nonaggression.", "reverse": true}, {"n": 52, "text": "Ownership claims and contractual transfer are the primary grammar of justice.", "reverse": true}, {"n": 53, "text": "The legitimacy of law should not depend on inherited institutions so long as title and consent are clear.", "reverse": true}, {"n": 54, "text": "A legal order may rightly rest on duties, offices, status-relations, or public purposes that are not reducible to property and contract.", "reverse": false}, {"n": 55, "text": "Some genuine legal obligations arise from membership, function, or office rather than voluntary agreement alone.", "reverse": false}, {"n": 56, "text": "Not every valid claim in law can be translated into ownership rights and consensual exchange.", "reverse": false}]}, {"key": "Lc", "short": "Law II", "title": "Customary-prudential law / Administrative-command law", "left": "customary-prudential law", "right": "administrative-command law", "higher": "administrative-command law", "items": [{"n": 57, "text": "Law grows out of custom, practice, and accumulated judgment rather than design from above.", "reverse": true}, {"n": 58, "text": "Equity is often necessary because strict rule-application cannot do justice in every case.", "reverse": true}, {"n": 59, "text": "Longstanding communal practice can generate genuine legal authority even without explicit enactment.", "reverse": true}, {"n": 60, "text": "Law that ignores local practice and inherited forms is usually brittle and destructive.", "reverse": true}, {"n": 61, "text": "Large modern orders need centrally promulgated rules and official hierarchies more than local inherited norms.", "reverse": false}, {"n": 62, "text": "A judge or magistrate should usually prioritize enacted policy and administrative purpose over customary expectation.", "reverse": false}, {"n": 63, "text": "Uniform command and formal procedure are usually preferable to locally variable equitable judgment.", "reverse": false}, {"n": 64, "text": "In complex societies, legal order is secured primarily by authoritative enactment, records, and compliance structures rather than custom.", "reverse": false}]}, {"key": "H", "short": "History", "title": "Fallibilist anti-historicism / Historicist teleology", "left": "anti-historicist", "right": "historicist-teleological", "higher": "historicist teleology", "items": [{"n": 65, "text": "Politics should proceed by piecemeal correction rather than claims to know history’s direction.", "reverse": true}, {"n": 66, "text": "History has an intelligible direction that political action can consciously advance.", "reverse": false}, {"n": 67, "text": "Revolutionary rupture can be rationally required by deep structural contradictions in an order.", "reverse": false}, {"n": 68, "text": "Appeals to historical destiny are usually masks for dogmatism and abuse.", "reverse": true}, {"n": 69, "text": "Social formations unfold according to large developmental patterns rather than pure contingency.", "reverse": false}, {"n": 70, "text": "It is possible to know enough about historical development to justify radical transformation.", "reverse": false}, {"n": 71, "text": "Good politics is mostly a matter of institutional trial and error, not historical mission.", "reverse": true}, {"n": 72, "text": "Some regimes become illegitimate because they stand against the next stage of historical development.", "reverse": false}]}, {"key": "D", "short": "Production", "title": "Concentrated mass production / Distributed district production", "left": "concentrated production", "right": "distributed district production", "higher": "distributed district production", "items": [{"n": 73, "text": "Advanced economies naturally and desirably tend toward giant firms and concentrated production.", "reverse": true}, {"n": 74, "text": "Dense networks of small firms, cooperatives, workshops, and regional districts can outperform centralized mass-capital.", "reverse": false}, {"n": 75, "text": "Local productive ecologies matter more than sheer scale for long-run social health.", "reverse": false}, {"n": 76, "text": "Economic vitality depends heavily on embedded supplier networks, vocational cultures, and place-based cooperation.", "reverse": false}, {"n": 77, "text": "National champions and large integrated corporations are usually superior to district-based productive orders.", "reverse": true}, {"n": 78, "text": "A healthy economy should preserve room for small and medium production rather than forcing concentration.", "reverse": false}]}];
+    const PROFILES = [{"id": "01", "name": "Lockean classical liberal", "family": "Liberal and post-liberal state forms", "slug": "lockean-classical-liberal", "code": {"F": -1, "C": -1, "Q": -2, "E": -2, "A": -1, "P": -2, "Adm": -1, "M": -2, "J": -2, "O": -2, "Lp": -2, "Lc": 0, "H": -2, "D": 0}, "summary": "Rights, consent, and limited government anchor the order. Property and civil freedom are central, distribution is secondary, and law leans strongly toward title and contract rather than communal purpose or administrative command."}, {"id": "02", "name": "Nozickian minarchism", "family": "Liberal and post-liberal state forms", "slug": "nozickian-minarchism", "code": {"F": -1, "C": -1, "Q": -2, "E": -2, "A": -2, "P": -2, "Adm": -2, "M": -2, "J": -2, "O": -2, "Lp": -2, "Lc": 0, "H": -2, "D": 0}, "summary": "The night-watchman state pushed close to its limit. Coercion is kept extremely narrow, administration is minimal, and legal order is built around title, consent, and nonaggression."}, {"id": "03", "name": "Neoliberal / ordoliberal constitutionalism", "family": "Liberal and post-liberal state forms", "slug": "neoliberal-ordoliberal-constitutionalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -2, "A": -1, "P": -1, "Adm": 1, "M": -2, "J": -1, "O": -1, "Lp": -1, "Lc": 1, "H": -2, "D": -1}, "summary": "Markets remain primary, but they are constitutionally framed by competition policy, monetary order, and institutional guardrails. It is more administrative than classical liberalism, yet still anti-historicist and broadly liberal."}, {"id": "04", "name": "Rawlsian egalitarian liberalism", "family": "Liberal and post-liberal state forms", "slug": "rawlsian-egalitarian-liberalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -2, "A": -1, "P": 0, "Adm": 1, "M": -1, "J": 2, "O": -1, "Lp": 1, "Lc": 0, "H": -2, "D": 0}, "summary": "Still liberal in its aspiration to public neutrality, but much more redistributive than Locke or Nozick. Justice is patterned more by fairness than by pure entitlement, while law is less proprietarian-title-centered."}, {"id": "05", "name": "Welfare-state social liberalism", "family": "Liberal and post-liberal state forms", "slug": "welfare-state-social-liberalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -1, "A": 0, "P": 0, "Adm": 2, "M": 0, "J": 1, "O": 0, "Lp": 1, "Lc": 1, "H": -2, "D": 0}, "summary": "The practical regime of social insurance, public services, and regulated capitalism. It is more institutional and managerial than philosophically elegant, and comfortable with bureaucracy as a normal tool of governance."}, {"id": "06", "name": "Popperian open-society liberalism", "family": "Liberal and post-liberal state forms", "slug": "popperian-open-society-liberalism", "code": {"F": -2, "C": -1, "Q": -2, "E": -2, "A": -1, "P": 0, "Adm": 0, "M": -1, "J": -1, "O": -1, "Lp": 0, "Lc": 0, "H": -2, "D": 0}, "summary": "Defined above all by anti-historicism and piecemeal reform. It distrusts grand historical missions, prefers reversible institutional correction, and is less rigid about property theory than harder-edged liberalisms."}, {"id": "07", "name": "Technocratic managerialism", "family": "Managerial and expert-rule profiles", "slug": "technocratic-managerialism", "code": {"F": -2, "C": -1, "Q": -2, "E": -1, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": 0, "O": 1, "Lp": 2, "Lc": 2, "H": 0, "D": -1}, "summary": "Experts, agencies, metrics, compliance, and optimization sit at the center of rule. It is neither title-contract jurisprudence nor customary-prudential law so much as administrative governance by office, procedure, and policy."}, {"id": "08", "name": "Progressive managerialism", "family": "Managerial and expert-rule profiles", "slug": "progressive-managerialism", "code": {"F": -2, "C": -1, "Q": -2, "E": 0, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": 1, "O": 1, "Lp": 2, "Lc": 2, "H": 1, "D": -1}, "summary": "Technocratic management with a stronger moralized inclusionary ethic. It expands administrative oversight, anti-discrimination enforcement, and norm-shaping bureaucracy while often presenting itself as neutral."}, {"id": "09", "name": "Developmental technocracy", "family": "Managerial and expert-rule profiles", "slug": "developmental-technocracy", "code": {"F": -2, "C": -2, "Q": -2, "E": 0, "A": 1, "P": 0, "Adm": 2, "M": 1, "J": 0, "O": 1, "Lp": 2, "Lc": 2, "H": 1, "D": -2}, "summary": "The planner-engineer state that treats growth, industrial upgrading, and infrastructural capacity as the decisive ends. Its jurisprudence is administrative-command oriented and its production model tends toward scale and concentration."}, {"id": "10", "name": "Hobbesian sovereigntism", "family": "Conservative, civic, and confessional forms", "slug": "hobbesian-sovereigntism", "code": {"F": -2, "C": -2, "Q": -2, "E": 0, "A": -2, "P": -1, "Adm": 1, "M": 0, "J": -1, "O": 2, "Lp": 1, "Lc": 2, "H": -2, "D": 0}, "summary": "A unified sovereign suppresses insecurity, feud, and fragmentation through overwhelming final authority. Property and law exist under sovereign order rather than prior to it, and command outranks custom."}, {"id": "11", "name": "Burkean traditional conservatism", "family": "Conservative, civic, and confessional forms", "slug": "burkean-traditional-conservatism", "code": {"F": -2, "C": 0, "Q": -2, "E": 1, "A": 1, "P": 1, "Adm": 0, "M": -1, "J": -1, "O": 0, "Lp": 1, "Lc": -2, "H": -2, "D": 0}, "summary": "Inheritance, prudence, local forms, and institutional memory matter more than abstract design. It is communitarian-leaning, embedded in social forms, and strongly attached to customary-prudential law."}, {"id": "12", "name": "Classical civic republicanism", "family": "Conservative, civic, and confessional forms", "slug": "classical-civic-republicanism", "code": {"F": -1, "C": 0, "Q": -2, "E": 2, "A": 1, "P": 0, "Adm": 0, "M": 0, "J": 0, "O": 1, "Lp": 1, "Lc": -1, "H": -1, "D": 0}, "summary": "Public virtue, anti-corruption, mixed constitution, and active citizenship define the regime. It is not liberal-neutral, and it expects civic character and shared ends."}, {"id": "13", "name": "Catholic integralism / confessional corporatism", "family": "Conservative, civic, and confessional forms", "slug": "catholic-integralism-confessional-corporatism", "code": {"F": -1, "C": 0, "Q": -2, "E": 2, "A": 2, "P": 1, "Adm": 0, "M": 0, "J": 0, "O": 2, "Lp": 2, "Lc": -1, "H": -1, "D": 0}, "summary": "The polity is ordered toward substantive truth and common benefit/interest, not liberal neutrality. Family, church, and corporate bodies mediate life, and law is non-proprietarian without becoming fully administrative-command."}, {"id": "14", "name": "Distributism", "family": "Conservative, civic, and confessional forms", "slug": "distributism", "code": {"F": 0, "C": 1, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": -1, "M": -1, "J": 1, "O": 0, "Lp": 2, "Lc": -2, "H": -2, "D": 2}, "summary": "Property should be widely dispersed rather than abolished or concentrated. It combines politics ordered toward the common benefit/interest with local production, mixed stewardship, and a strong attachment to customary-prudential legal form."}, {"id": "15", "name": "Guild socialism", "family": "Conservative, civic, and confessional forms", "slug": "guild-socialism", "code": {"F": 0, "C": 1, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 1, "J": 1, "O": 0, "Lp": 2, "Lc": 0, "H": 0, "D": 1}, "summary": "Socialism through organized functions, guilds, and producer bodies rather than through a pure centralized command state. It is associative, communal, and structurally pluralist."}, {"id": "16", "name": "Third Italy / Swiss district federalism", "family": "Conservative, civic, and confessional forms", "slug": "third-italy-swiss-district-federalism", "code": {"F": -1, "C": 2, "Q": -2, "E": 1, "A": 1, "P": 1, "Adm": -1, "M": -2, "J": 1, "O": 0, "Lp": 1, "Lc": -2, "H": -2, "D": 2}, "summary": "Federal, district-based, SME-heavy, and intensely place-bound. It likes markets, but in local productive ecologies with customary-prudential institutions and distributed production."}, {"id": "17", "name": "Classical ancap", "family": "Proprietarian and anarchic market forms", "slug": "classical-ancap", "code": {"F": 2, "C": 2, "Q": -2, "E": -2, "A": -2, "P": -2, "Adm": -2, "M": -2, "J": -2, "O": -2, "Lp": -2, "Lc": 0, "H": -2, "D": 0}, "summary": "The pure property-contract corner: non-monopoly force, polycentric adjudication, strict private ownership, narrow coercion, and a jurisprudence centered almost entirely on title and consent."}, {"id": "18", "name": "Hoppean covenantal proprietarianism", "family": "Proprietarian and anarchic market forms", "slug": "hoppean-covenantal-proprietarianism", "code": {"F": 2, "C": 2, "Q": -2, "E": 1, "A": 1, "P": -2, "Adm": -1, "M": -2, "J": -1, "O": 0, "Lp": -2, "Lc": 0, "H": -2, "D": 1}, "summary": "Still grounded in ownership and contract, but no longer liberal-neutral. Covenant spaces can carry thick norms and exclusion, even while the legal core remains hard proprietarian."}, {"id": "19", "name": "Proudhonian mutualism", "family": "Proprietarian and anarchic market forms", "slug": "proudhonian-mutualism", "code": {"F": 2, "C": 2, "Q": -2, "E": 1, "A": 1, "P": 1, "Adm": -1, "M": -1, "J": 1, "O": -1, "Lp": 1, "Lc": -1, "H": -1, "D": 2}, "summary": "Exchange and mutual credit remain central, but rentier ownership is transformed and federation matters. It is polycentric, anti-centralized, and oriented toward distributed production rather than giant capital."}, {"id": "20", "name": "Kropotkinian anarchist communism", "family": "Proprietarian and anarchic market forms", "slug": "kropotkinian-anarchist-communism", "code": {"F": 2, "C": 2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": -2, "M": 2, "J": 2, "O": 0, "Lp": 2, "Lc": -1, "H": 0, "D": 2}, "summary": "Mutual aid, federation, and decentralized communism without a coercive state center. It is communitarian, anti-hierarchical, egalitarian, and strongly committed to commons and stewardship."}, {"id": "21", "name": "Anarcho-syndicalism", "family": "Proprietarian and anarchic market forms", "slug": "anarcho-syndicalism", "code": {"F": 2, "C": 2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 2, "J": 2, "O": 0, "Lp": 2, "Lc": 0, "H": 1, "D": 1}, "summary": "Worker power through federated syndicates and labor associations. More structured than Kropotkinian communism, but still decentralized relative to party-state socialism."}, {"id": "22", "name": "Orthodox Marxism", "family": "Socialist and Marxist forms", "slug": "orthodox-marxism", "code": {"F": 0, "C": 1, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 2, "J": 2, "O": 1, "Lp": 2, "Lc": 0, "H": 2, "D": -1}, "summary": "Defined less by a fixed constitutional blueprint than by class analysis and historical development. Historicist teleology is decisive, while legal form is subordinate to deeper social structure."}, {"id": "23", "name": "Marxist-Leninism", "family": "Socialist and Marxist forms", "slug": "marxist-leninism", "code": {"F": -2, "C": -2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 2, "M": 2, "J": 1, "O": 2, "Lp": 2, "Lc": 2, "H": 2, "D": -2}, "summary": "The classic party-state form: centralized, bureaucratic, planned, and disciplined. It combines historicist certainty with strong administrative-command jurisprudence."}, {"id": "24", "name": "Trotskyism", "family": "Socialist and Marxist forms", "slug": "trotskyism", "code": {"F": -1, "C": -2, "Q": -2, "E": 2, "A": 2, "P": 2, "Adm": 1, "M": 2, "J": 2, "O": 2, "Lp": 2, "Lc": 1, "H": 2, "D": -2}, "summary": "Near Marxist-Leninism on many axes, but more suspicious of bureaucratic hardening and more explicitly revolutionary-internationalist. It remains strongly historicist and socialist."}, {"id": "25", "name": "Maoism", "family": "Socialist and Marxist forms", "slug": "maoism", "code": {"F": -2, "C": -2, "Q": -1, "E": 2, "A": 2, "P": 2, "Adm": 1, "M": 2, "J": 2, "O": 2, "Lp": 2, "Lc": 1, "H": 2, "D": 0}, "summary": "Combines central party power with mass-line mobilization, voluntarism, and rural revolutionary emphasis. It is less purely technocratic than Soviet-style Leninism."}, {"id": "26", "name": "Market socialism", "family": "Socialist and Marxist forms", "slug": "market-socialism", "code": {"F": -1, "C": 0, "Q": -2, "E": 0, "A": 1, "P": 2, "Adm": 1, "M": 1, "J": 1, "O": 0, "Lp": 1, "Lc": 0, "H": 0, "D": 0}, "summary": "Markets remain, but control of capital and ownership patterns are transformed. It sits between social democracy and command socialism."}, {"id": "27", "name": "Social democracy", "family": "Socialist and Marxist forms", "slug": "social-democracy", "code": {"F": -2, "C": 0, "Q": -2, "E": 0, "A": 0, "P": 0, "Adm": 2, "M": 0, "J": 2, "O": 0, "Lp": 1, "Lc": 1, "H": -1, "D": 0}, "summary": "Laborist redistribution without abolishing capitalism. It is more statist and administrative than guild socialism, less revolutionary than Marxism, and more egalitarian than classical liberalism."}, {"id": "28", "name": "Developmental statism / state capitalism", "family": "National-developmental and corporatist-authoritarian forms", "slug": "developmental-statism-state-capitalism", "code": {"F": -2, "C": -2, "Q": -2, "E": 1, "A": 1, "P": 0, "Adm": 2, "M": 1, "J": 0, "O": 1, "Lp": 2, "Lc": 2, "H": 1, "D": -2}, "summary": "A strong state uses firms, banks, and strategic sectors to build industrial power. It is production-first, high-capacity, and comfortable with concentrated productive organization."}, {"id": "29", "name": "Fascist / national-corporatist mobilization", "family": "National-developmental and corporatist-authoritarian forms", "slug": "fascist-national-corporatist-mobilization", "code": {"F": -2, "C": -2, "Q": -2, "E": 2, "A": 2, "P": 0, "Adm": 2, "M": 1, "J": -1, "O": 2, "Lp": 2, "Lc": 2, "H": 1, "D": -2}, "summary": "Mobilized national unity, anti-pluralism, and functional or party command define the form. It is not just authoritarian capitalism; it is purposive, centralized, and heavily disciplinary."}, {"id": "30", "name": "Bonapartist / bureaucratic Caesarism", "family": "National-developmental and corporatist-authoritarian forms", "slug": "bonapartist-bureaucratic-caesarism", "code": {"F": -2, "C": -2, "Q": -2, "E": 0, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": -1, "O": 2, "Lp": 2, "Lc": 2, "H": 0, "D": -1}, "summary": "A plebiscitary executive state resting on army, bureaucracy, and administrative centralization. It is less doctrinal than fascism or Leninism, but still heavy on command and hierarchy."}, {"id": "31", "name": "Neo-feudal / medieval pluralism", "family": "Premodern, localist, and plural-jurisdiction forms", "slug": "neo-feudal-medieval-pluralism", "code": {"F": 2, "C": 2, "Q": 1, "E": 2, "A": 2, "P": 2, "Adm": -2, "M": 0, "J": -1, "O": 2, "Lp": 2, "Lc": -2, "H": -2, "D": 2}, "summary": "Layered lords, estates, guilds, charters, and overlapping jurisdictions. It is plural, embedded, customary, and willing to tolerate bounded feud more than modern anti-feud orders."}, {"id": "32", "name": "Tribal customary confederation", "family": "Premodern, localist, and plural-jurisdiction forms", "slug": "tribal-customary-confederation", "code": {"F": 2, "C": 2, "Q": 2, "E": 2, "A": 2, "P": 2, "Adm": -2, "M": 0, "J": 0, "O": 2, "Lp": 2, "Lc": -2, "H": -2, "D": 2}, "summary": "Kin-centered, customary, and held together by elders, retaliation norms, and confederated relations. It is strongly embedded and radically non-administrative."}, {"id": "33", "name": "Proprietary communal empire", "family": "Premodern, localist, and plural-jurisdiction forms", "slug": "proprietary-communal-empire", "code": {"F": 1, "C": 2, "Q": -1, "E": 2, "A": 2, "P": 2, "Adm": 0, "M": 0, "J": 0, "O": 2, "Lp": 1, "Lc": -1, "H": -1, "D": 1}, "summary": "Neither Leviathan nor pure anarchism: a layered communitarian order with shared strategic goods, real common burdens, and multiple jurisdictions that remain coordinated rather than fully fused."}, {"id": "34", "name": "Ordoliberal social market constitutionalism", "family": "Transitional and hybrid modern profiles", "slug": "ordoliberal-social-market-constitutionalism", "code": {"F": -2, "C": 0, "Q": -2, "E": -1, "A": 0, "P": -1, "Adm": 1, "M": -1, "J": 1, "O": 0, "Lp": -1, "Lc": 1, "H": -2, "D": 0}, "summary": "Markets need a strong framework-state to remain competitive and humane. More social and more institution-heavy than generic neoliberalism, but still anti-historicist and anti-revolutionary."}, {"id": "35", "name": "Progressive social-democratic managerialism", "family": "Transitional and hybrid modern profiles", "slug": "progressive-social-democratic-managerialism", "code": {"F": -2, "C": -1, "Q": -2, "E": 0, "A": -1, "P": 0, "Adm": 2, "M": 0, "J": 2, "O": 1, "Lp": 1, "Lc": 2, "H": 1, "D": -1}, "summary": "High administration, strong anti-discrimination enforcement, redistributive legitimacy, and expert rule without abandoning large-scale corporate structures. It sits between social democracy and progressive managerialism."}, {"id": "36", "name": "National-populist developmentalism", "family": "Transitional and hybrid modern profiles", "slug": "national-populist-developmentalism", "code": {"F": -2, "C": -2, "Q": -2, "E": 2, "A": 1, "P": 0, "Adm": 1, "M": 0, "J": 0, "O": 1, "Lp": 1, "Lc": 2, "H": 1, "D": -1}, "summary": "Anti-managerial in style but still statist in structure. It mixes executive centralization, national rhetoric, and developmental priorities with a stronger emphasis on common benefit/interest or national identity."}];
+    const FAMILY_DESCRIPTIONS = {"Liberal and post-liberal state forms": "Liberal orders prioritize rights, consent, neutrality, and anti-historicist reform, but differ sharply over redistribution, administration, and how soft property becomes under social correction.", "Managerial and expert-rule profiles": "These profiles are defined less by inherited custom or title-contract jurisprudence than by agencies, expertise, metrics, policy steering, and institutional optimization.", "Conservative, civic, and confessional forms": "These attractors lean toward embedded anthropology, substantive common benefit/interest, and thicker public membership, though they range from prudential traditionalism to explicit confessional ordering.", "Proprietarian and anarchic market forms": "These profiles reject a final monopolist or sharply narrow the state, while centering contract, federation, mutual aid, or covenantal space in different combinations.", "Socialist and Marxist forms": "These attractors are marked by social ownership, planning or transformed capital control, stronger egalitarian commitments, and varying degrees of historicist confidence.", "National-developmental and corporatist-authoritarian forms": "These profiles centralize force and administration around nation, mobilization, development, or executive command, often favoring concentrated productive capacity.", "Premodern, localist, and plural-jurisdiction forms": "These orders are layered, customary, communal, and often non-monopoly or polycentric, with low formal administration and stronger tolerance for status or overlapping jurisdictions.", "Transitional and hybrid modern profiles": "These profiles sit between cleaner doctrines, combining market frameworks, managerial correction, nationalism, or social-democratic administration in hybrid modern forms."};
     const AXIS_ORDER = AXES.map(axis => axis.key);
     const TOTAL_QUESTIONS = AXES.reduce((sum, axis) => sum + axis.items.length, 0);
     const STORAGE_KEY = "pedt-v1";
@@ -1012,23 +822,18 @@
       return axisResults.map(axis => {
         const leftPct = ((axis.average - 1) / 6) * 100;
         return `
-          <article class="axis-card">
-            <div class="axis-card-head">
-              <div>
-                <h4>${escapeHtml(axis.short)} <small>(${escapeHtml(axis.key)})</small></h4>
-                <small>${escapeHtml(axis.title)}</small>
-              </div>
-              <div class="badge">${axis.average.toFixed(2)} · ${signed(axis.code)}</div>
+          <div class="axis-result-row">
+            <div class="axis-result-name">
+              <strong>${escapeHtml(axis.short)}</strong>
+              <small>${escapeHtml(axis.key)} · ${escapeHtml(axis.title)}</small>
             </div>
-            <div class="track">
-              <div class="marker" style="left:${leftPct}%"></div>
+            <div class="axis-result-score">${axis.average.toFixed(2)} / ${signed(axis.code)}</div>
+            <div class="axis-result-track">
+              <div class="track"><div class="marker" style="left:${leftPct}%"></div></div>
+              <div class="track-labels"><span>${escapeHtml(axis.left)}</span><span>${escapeHtml(axis.right)}</span></div>
             </div>
-            <div class="track-labels">
-              <span>${escapeHtml(axis.left)}</span>
-              <span>${escapeHtml(axis.right)}</span>
-            </div>
-            <p class="small-muted">${axis.sentence}</p>
-          </article>
+            <div class="axis-result-meaning">${axis.sentence}</div>
+          </div>
         `;
       }).join("");
     }
@@ -1086,56 +891,56 @@
       const bestFamily = familyMatches[0];
       const topAxisList = strongestAxes(axisResults, 4).map(axis => `<span class="pill">${escapeHtml(axis.short)} · ${axis.average.toFixed(2)}</span>`).join("");
 
-      const matchCards = topMatches.map((match, index) => {
+      const matchRows = topMatches.map((match, index) => {
         const aligned = alignedAxes(userCode, match.code, 3).map(axis => axis.short).join(", ");
         const splits = keySplits(userCode, match).map(item => `<li>${item}</li>`).join("");
         return `
-          <article class="match-card">
-            <h3><a href="#profile-${match.id}-${match.slug}">${index + 1}. ${escapeHtml(match.name)}</a></h3>
-            <div class="match-meta">
-              <span>Family: ${escapeHtml(match.family)}</span>
-              <span>Weighted distance: ${match.weighted}</span>
-              <span>Raw distance: ${match.raw}</span>
+          <article class="match-row">
+            <div class="match-rank">0${index + 1}</div>
+            <div class="match-title">
+              <h3><a href="#profile-${match.id}-${match.slug}">${escapeHtml(match.name)}</a></h3>
+              <div class="match-meta">
+                <span>${escapeHtml(match.family)}</span>
+                <span>W ${match.weighted}</span>
+                <span>R ${match.raw}</span>
+              </div>
             </div>
-            <p>${escapeHtml(match.summary)}</p>
-            <p class="small-muted">Strong overlap on <strong>${escapeHtml(aligned)}</strong>. This is an attractor match, not an identity claim.</p>
-            <div class="mono">${escapeHtml(codeLineFromObject(match.code))}</div>
-            <ul class="key-splits">${splits}</ul>
+            <div class="match-copy">
+              <p>${escapeHtml(match.summary)}</p>
+              <p class="small-muted">Strong overlap on <strong>${escapeHtml(aligned)}</strong>. This is an attractor match, not an identity claim.</p>
+              <div class="mono">${escapeHtml(codeLineFromObject(match.code))}</div>
+              <ul class="key-splits">${splits}</ul>
+            </div>
           </article>
         `;
       }).join("");
 
       const resultsHtml = `
-        <div class="summary-grid">
-          <div class="result-callout">
+        <div class="results-head">
+          <div>
             <h3>Compact verbal result</h3>
             <p class="compact-line">${escapeHtml(compactVerbal)}</p>
-            <h3 style="margin-top:18px;">One-line code</h3>
-            <div class="mono">${escapeHtml(codeLineFromObject(userCode))}</div>
-            <h3 style="margin-top:18px;">Nearest family</h3>
-            <p>${nearestFamilyNarrative(bestFamily, axisResults)}</p>
+            <div class="code-block">
+              <h3>Vector code</h3>
+              <div class="mono">${escapeHtml(codeLineFromObject(userCode))}</div>
+            </div>
+          </div>
+          <div>
+            <h3>Nearest family</h3>
+            <p class="result-family">${nearestFamilyNarrative(bestFamily, axisResults)}</p>
             <p class="small-muted">${escapeHtml(FAMILY_DESCRIPTIONS[bestFamily.family])}</p>
-            <h3 style="margin-top:18px;">Your most pronounced axes</h3>
             <div class="inline-meta">${topAxisList}</div>
           </div>
-
-          <div class="result-callout">
-            <h3>How to read the attractors</h3>
-            <p>Think of the canon as a field of magnets instead of a shelf of strict labels. A result can cluster near one profile on force and coercion, a second on anthropology and property, and a third on production or history.</p>
-            <p class="small-muted">Use the top matches as nearest attractors, then read the key splits to see where your combination departs from the canon.</p>
-          </div>
         </div>
 
-        <h3 style="margin-top:22px;">Full profile chart</h3>
-        <div class="chart-grid">
-          ${resultAxisCards(axisResults)}
-        </div>
+        <div class="results-subhead"><h3>Axis readout</h3><span>14 dimensions / averages + five-step codes</span></div>
+        <div class="axis-results">${resultAxisCards(axisResults)}</div>
 
-        <h3 style="margin-top:22px;">Top attractor matches</h3>
-        <div class="matches">${matchCards}</div>
+        <div class="results-subhead"><h3>Nearest attractors</h3><span>sorted by weighted distance</span></div>
+        <div class="match-list">${matchRows}</div>
 
         <details>
-          <summary>Show all profile distances</summary>
+          <summary>All profile distances</summary>
           ${allDistancesTable(matches)}
         </details>
       `;
@@ -1163,38 +968,61 @@
     function renderProfiles() {
       const indexHost = document.getElementById("profileIndex");
       const familyHost = document.getElementById("profileFamilies");
+      const familyOrder = Object.keys(FAMILY_DESCRIPTIONS);
 
       indexHost.innerHTML = `
+        <div class="profile-toolbar">
+          <input id="profileSearch" type="search" placeholder="Search profile, family, or summary…" aria-label="Search canonical profiles" />
+          <select id="familyFilter" aria-label="Filter profiles by family">
+            <option value="">All profile families</option>
+            ${familyOrder.map(family => `<option value="${escapeHtml(family)}">${escapeHtml(family)}</option>`).join("")}
+          </select>
+        </div>
         <div class="family-links">
-          ${PROFILES.map(profile => `<a class="anchor-link" href="#profile-${profile.id}-${profile.slug}">${escapeHtml(profile.id)}. ${escapeHtml(profile.name)}</a>`).join("")}
+          ${familyOrder.map(family => `<a class="anchor-link" href="#family-${family.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">${escapeHtml(family)}</a>`).join("")}
         </div>
       `;
 
-      const familyOrder = Object.keys(FAMILY_DESCRIPTIONS);
       familyHost.innerHTML = familyOrder.map(family => {
         const members = PROFILES.filter(profile => profile.family === family);
+        const familySlug = family.toLowerCase().replace(/[^a-z0-9]+/g, "-");
         return `
-          <section class="family-section" id="family-${family.toLowerCase().replace(/[^a-z0-9]+/g, "-")}">
+          <section class="family-section" id="family-${familySlug}" data-family="${escapeHtml(family)}">
             <h3>${escapeHtml(family)}</h3>
             <p class="family-blurb">${escapeHtml(FAMILY_DESCRIPTIONS[family])}</p>
-            <div class="family-links">
-              ${members.map(profile => `<a class="anchor-link" href="#profile-${profile.id}-${profile.slug}">${escapeHtml(profile.id)}. ${escapeHtml(profile.name)}</a>`).join("")}
-            </div>
-            <div class="matches">
+            <div class="profile-list">
               ${members.map(profile => `
-                <article class="profile-card" id="profile-${profile.id}-${profile.slug}">
-                  <h4>${escapeHtml(profile.id)}. ${escapeHtml(profile.name)}</h4>
-                  <div class="profile-meta">
-                    <span>${escapeHtml(profile.family)}</span>
+                <article class="profile-row" id="profile-${profile.id}-${profile.slug}" data-family="${escapeHtml(profile.family)}" data-search="${escapeHtml(`${profile.id} ${profile.name} ${profile.family} ${profile.summary}`.toLowerCase())}">
+                  <div class="profile-id">${escapeHtml(profile.id)}</div>
+                  <div class="profile-name">
+                    <h4>${escapeHtml(profile.name)}</h4>
+                    <div class="mono">${escapeHtml(codeLineFromObject(profile.code))}</div>
                   </div>
-                  <p>${escapeHtml(profile.summary)}</p>
-                  <div class="mono">${escapeHtml(codeLineFromObject(profile.code))}</div>
+                  <div class="profile-copy">${escapeHtml(profile.summary)}</div>
                 </article>
               `).join("")}
             </div>
           </section>
         `;
       }).join("");
+
+      const search = document.getElementById("profileSearch");
+      const filter = document.getElementById("familyFilter");
+      const applyProfileFilters = () => {
+        const query = search.value.trim().toLowerCase();
+        const family = filter.value;
+        document.querySelectorAll(".profile-row").forEach(row => {
+          const matchesQuery = !query || row.dataset.search.includes(query);
+          const matchesFamily = !family || row.dataset.family === family;
+          row.classList.toggle("search-hidden", !(matchesQuery && matchesFamily));
+        });
+        document.querySelectorAll(".family-section").forEach(section => {
+          const anyVisible = Array.from(section.querySelectorAll(".profile-row")).some(row => !row.classList.contains("search-hidden"));
+          section.hidden = !anyVisible;
+        });
+      };
+      search.addEventListener("input", applyProfileFilters);
+      filter.addEventListener("change", applyProfileFilters);
     }
 
     document.getElementById("calculateBtn").addEventListener("click", renderResults);
